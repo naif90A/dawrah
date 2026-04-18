@@ -31,7 +31,7 @@
             50% { transform: scale(1.05); opacity: 1; }
         }
 
-        /* شريط التعليقات بدون أرقام */
+        /* شريط التعليقات - تم تبطئته إلى 180s */
         .ticker-container {
             width: 100%;
             overflow: hidden;
@@ -42,7 +42,7 @@
         }
         .ticker-wrapper {
             display: inline-block;
-            animation: ticker-scroll 150s linear infinite;
+            animation: ticker-scroll 180s linear infinite;
         }
         .comment-item {
             display: inline-block;
@@ -55,13 +55,6 @@
         @keyframes ticker-scroll {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
-        }
-
-        .whatsapp-note {
-            color: #64748b;
-            font-size: 0.85rem;
-            margin-top: 10px;
-            display: block;
         }
     </style>
 </head>
@@ -77,68 +70,10 @@
             <div class="comment-item"><span>يوسف:</span> الدورة واضحة حتى للي ما يفهم بالتقنية</div>
             <div class="comment-item"><span>فارس:</span> دورة الهكر الاخلاقي عند سعود هي الصح</div>
             <div class="comment-item"><span>مساعد:</span> انصح بالدورة للي يبي يتعلم صدق</div>
-            <div class="comment-item"><span>هاني:</span> دورة ممتازة ودعم فني مستمر ما قصرت</div>
             <div class="comment-item"><span>أبو ريان:</span> تعامل راقي وسرعة بالرد، الله يبارك لك</div>
-            <div class="comment-item"><span>فيصل:</span> كنت خايف بس طلع الرجال ثقة وثقة جداً</div>
-            <div class="comment-item"><span>ماجد العتيبي:</span> بيض الله وجهك على هالمحتوى المطنوخ</div>
-            <div class="comment-item"><span>تركي:</span> بديت من الصفر والحين فاهم كل شي</div>
-            <div class="comment-item"><span>فهد السهلي:</span> المصداقية عند سعود فوق كل اعتبار</div>
-            <div class="comment-item"><span>بندر:</span> والله اني استفدت فايدة ما توقعتها</div>
-            <div class="comment-item"><span>نايف الشمري:</span> من جربت الدورة ارتحت، شغل مرتب</div>
-            <div class="comment-item"><span>سلطان:</span> أفضل محتوى تقني مر علي للأمانة</div>
             <div class="comment-item"><span>بدر:</span> انصح الجميع بالاشتراك بدون تردد</div>
-            <div class="comment-item"><span>راكان:</span> تسلم يمينك يا سعود، ما قصرت معنا</div>
             <div class="comment-item"><span>نواف:</span> ختامها مسك، أطلق دورة مع أطلق مدرب</div>
-            <div class="comment-item"><span>خالد الروقي:</span> الله يوفقك، الشرح غير مفاهيمي بالكامل</div>
-            <div class="comment-item"><span>عبدالله:</span> الشرح يبرد الكبد، وافي وكافي</div>
-            <div class="comment-item"><span>يوسف:</span> الدورة واضحة حتى للي ما يفهم بالتقنية</div>
-            <div class="comment-item"><span>فارس:</span> دورة الهكر الاخلاقي عند سعود هي الصح</div>
-            <div class="comment-item"><span>مساعد:</span> انصح بالدورة للي يبي يتعلم صدق</div>
-            <div class="comment-item"><span>هاني:</span> دورة ممتازة ودعم فني مستمر ما قصرت</div>
-            <div class="comment-item"><span>أبو ريان:</span> تعامل راقي وسرعة بالرد، الله يبارك لك</div>
-            <div class="comment-item"><span>فيصل:</span> كنت خايف بس طلع الرجال ثقة وثقة جداً</div>
-            <div class="comment-item"><span>ماجد العتيبي:</span> بيض الله وجهك على هالمحتوى المطنوخ</div>
-            <div class="comment-item"><span>تركي:</span> بديت من الصفر والحين فاهم كل شي</div>
-            <div class="comment-item"><span>فهد السهلي:</span> المصداقية عند سعود فوق كل اعتبار</div>
-            <div class="comment-item"><span>بندر:</span> والله اني استفدت فايدة ما توقعتها</div>
-            <div class="comment-item"><span>نايف الشمري:</span> من جربت الدورة ارتحت، شغل مرتب</div>
-            <div class="comment-item"><span>سلطان:</span> أفضل محتوى تقني مر علي للأمانة</div>
-            <div class="comment-item"><span>حمد:</span> سعود راعي فزعات وشرحه يوصل بسرعة</div>
-            <div class="comment-item"><span>سعد الدوسري:</span> أطلق دورة وربي، سرعة وإتقان</div>
-            <div class="comment-item"><span>عزوز:</span> ياشيخ الله يرحم والديك على هالمعلومات</div>
-            <div class="comment-item"><span>بدر:</span> انصح الجميع بالاشتراك بدون تردد</div>
-            <div class="comment-item"><span>سطام:</span> الله يبيض وجهك يالامير على الشغل النظيف</div>
-            <div class="comment-item"><span>سلمان:</span> الدورة متعوب عليها وتستاهل كل ريال</div>
-            <div class="comment-item"><span>راكان:</span> تسلم يمينك يا سعود، ما قصرت معنا</div>
-            <div class="comment-item"><span>منصور:</span> افضل مدرب أمن سيبراني بلا منازع</div>
-            <div class="comment-item"><span>أبو سارة:</span> الله يبارك لك في حلالك، دورة بطلة</div>
-            <div class="comment-item"><span>وليد:</span> المحتوى دسم والشرح سهل جداً</div>
-            <div class="comment-item"><span>ثامر:</span> تم تفعيل الدورة بثواني، شكراً لك</div>
-            <div class="comment-item"><span>سامي:</span> فزعة ومرجلة، هذا سعود اللي نعرفه</div>
-            <div class="comment-item"><span>مشعل:</span> ميزة سعود إنه يعطيك المختصر المفيد</div>
-            <div class="comment-item"><span>حمود:</span> شغل احترافي ورسمي، كفو</div>
-            <div class="comment-item"><span>فايز:</span> ما ندمت اني دفعت فيها، تستاهل</div>
-            <div class="comment-item"><span>مساعد:</span> الشرح العملي هو اللي فرق معي</div>
-            <div class="comment-item"><span>أحمد:</span> شكرا لك من القلب يا وحش</div>
-            <div class="comment-item"><span>طلال:</span> كنت ضايع والحين عرفت الطريق صح</div>
-            <div class="comment-item"><span>عمر:</span> الدورة ذي غيرت حياتي المهنية</div>
-            <div class="comment-item"><span>جابر:</span> اشهد بالله انه ثقة وامين</div>
-            <div class="comment-item"><span>علي:</span> جودة في الطرح وسرعة في الرد</div>
-            <div class="comment-item"><span>مشاري:</span> المعلومات اللي بالدورة ما تلقاها باي مكان</div>
-            <div class="comment-item"><span>ريان:</span> الله يرفع قدرك، استفدنا كثير</div>
-            <div class="comment-item"><span>باسم:</span> لغة الشرح مفهومة وبسيطة جداً</div>
-            <div class="comment-item"><span>ابراهيم:</span> افضل استثمار سويته بـ 2026</div>
-            <div class="comment-item"><span>غانم:</span> كفيت ووفيت يا سعود، شرح وافي</div>
-            <div class="comment-item"><span>حاتم:</span> انصح بالاشتراك وبقوة يا شباب</div>
-            <div class="comment-item"><span>نبيل:</span> الدورة شاملة لكل شي تحتاجه</div>
-            <div class="comment-item"><span>رائد:</span> الله يرزقك من واسع فضله، شكراً</div>
-            <div class="comment-item"><span>سالم:</span> الدورة خرافية والتطبيق العملي فيها بطل</div>
-            <div class="comment-item"><span>معاذ:</span> مجهود جبار تشكر عليه يا سعود</div>
-            <div class="comment-item"><span>ممدوح:</span> الحين أقدر أقول إني محترف حماية</div>
-            <div class="comment-item"><span>نواف:</span> ختامها مسك، أطلق دورة مع أطلق مدرب</div>
-        </div>
-    </div>
-        </div>
+            </div>
     </div>
 
     <div class="max-w-4xl mx-auto px-6 mt-12 flex justify-between items-center bg-slate-800/30 backdrop-blur p-5 rounded-2xl border border-slate-700 shadow-xl">
@@ -163,7 +98,7 @@
         </div>
     </div>
 
-    <header class="pt-16 pb-24 px-4 text-center">
+    <header class="pt-16 pb-32 px-4 text-center">
         <div class="mb-8 flex justify-center">
             <div class="w-32 h-32 bg-blue-600 rounded-full flex items-center justify-center glow-logo border-4 border-slate-900">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -176,28 +111,31 @@
             دورة <span class="text-blue-500">الاختراق الأخلاقي</span>
         </h1>
         
-        <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-            تعلم أسرار الحماية والثغرات بأسلوب عملي. انضم الآن لأكبر مجتمع تقني في المملكة.
+        <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+            انضم الآن إلى أقوى برنامج تدريبي في الشرق الأوسط لاحتراف الأمن السيبراني.
         </p>
 
-        <div class="flex flex-col items-center gap-6">
+        <div class="flex flex-col items-center">
             <a href="register.html?item=دورة الاختراق الأخلاقي&price=800" 
                class="px-14 py-5 bg-blue-600 text-white font-black rounded-full text-2xl shadow-2xl hover:bg-blue-500 hover:scale-105 transition-all duration-300">
                 اشترك الآن (800 ريال)
             </a>
-            
-            <span class="whatsapp-note italic text-blue-400 opacity-90">
-                * بعد السداد، سيتم التواصل معك مباشرة عبر الواتساب لتفعيل اشتراكك.
-            </span>
         </div>
     </header>
 
-    <footer class="py-10 text-center border-t border-slate-900/50 text-gray-600 text-xs">
-        <p>© 2026 جميع الحقوق محفوظة لمتجر سعود</p>
+    <footer class="py-12 bg-black/40 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="flex justify-center gap-6 mb-6 text-slate-400 text-sm">
+                <a href="#" class="hover:text-blue-500 transition">شروط الاستخدام</a>
+                <a href="#" class="hover:text-blue-500 transition">سياسة الخصوصية</a>
+                <a href="#" class="hover:text-blue-500 transition">الدعم الفني</a>
+            </div>
+            <p class="text-slate-500 text-sm mb-2">© 2026 جميع الحقوق محفوظة لـ **متجر سعود الرسمي**</p>
+            <p class="text-slate-600 text-[10px] uppercase tracking-widest">SAUD CYBER SECURITY ACADEMY - EST 2024</p>
+        </div>
     </footer>
 
     <script>
-        // دالة العداد المتحرك
         function animateValue(obj, start, end, duration) {
             let startTimestamp = null;
             const step = (timestamp) => {
@@ -214,7 +152,7 @@
 
         window.onload = () => {
             const obj = document.getElementById("subscriber-count");
-            animateValue(obj, 0, 2676, 3000); 
+            animateValue(obj, 0, 2676, 3500); 
         };
     </script>
 </body>
