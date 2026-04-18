@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سعود | المتجر الرسمي المعتمد</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #020617;
+            color: white;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* إضاءة خلفية خفيفة وهادئة */
+        .ambient-glow {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% -20%, #1e293b 0%, #020617 80%);
+            z-index: -1;
+        }
+
+        /* الواجهة الأساسية */
+        .glow-logo {
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+            animation: pulse-blue 4s infinite ease-in-out;
+        }
+
+        @keyframes pulse-blue {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        /* شريط التعليقات (50 تعليق شعبي) */
+        .ticker-container {
+            width: 100%;
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid #1e293b;
+            padding: 12px 0;
+            white-space: nowrap;
+        }
+        .ticker-wrapper {
+            display: inline-block;
+            animation: ticker-scroll 180s linear infinite;
+        }
+        .comment-item {
+            display: inline-block;
+            margin-left: 50px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        .comment-item span { color: #3b82f6; font-weight: bold; margin-left: 5px; }
+
+        @keyframes ticker-scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* بطاقات زجاجية */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: #3b82f6;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-action {
+            background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
+            transition: 0.3s;
+        }
+        .btn-action:hover { filter: brightness(1.2); }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow"></div>
+
+    <div class="ticker-container">
+        <div class="ticker-wrapper">
+            <div class="comment-item"><span>أبو فهد:</span> عز الله مقامك يا سعود، السناب رجع بثواني</div>
+            <div class="comment-item"><span>مطلق العتيبي:</span> يوزر مطنوخ وراعي فزعات بيض الله وجهك</div>
+            <div class="comment-item"><span>صالح:</span> الدورة تسوى وزنها ذهب يا عيال لا تفوتكم</div>
+            <div class="comment-item"><span>نايف الشمري:</span> من جربت فك الحظر عنده ارتحت، ثقة</div>
+            <div class="comment-item"><span>حمد:</span> والله إنك كفو، يوزر ثلاثي زي اللوز</div>
+            <div class="comment-item"><span>سعد الدوسري:</span> أطلق متجر وربي، سرعة ومصداقية</div>
+            <div class="comment-item"><span>عزوز:</span> ياشيخ الله يرحم والديك، فكيت أزمة الحظر</div>
+            <div class="comment-item"><span>عبدالله:</span> الشرح في الدورة يبرد الكبد، وافي وكافي</div>
+            <div class="comment-item"><span>سلطان:</span> شريت يوزر ثنائي، قسماً بالله فخامة</div>
+            <div class="comment-item"><span>ابو ريان:</span> تعامل راقي وسرعة بالرد، الله يبارك لك</div>
+            <div class="comment-item"><span>ماجد:</span> للامانه افضل سعر بالسوق عند سعود</div>
+            <div class="comment-item"><span>فيصل:</span> كنت خايف بس طلع الرجال ثقة وثقة جداً</div>
+            <div class="comment-item"><span>مشاري:</span> تم استلام الحساب مع كامل معلوماته، شكراً</div>
+            <div class="comment-item"><span>بندر:</span> فك حظر الجهاز ضبط معي، انت بطل</div>
+            <div class="comment-item"><span>خالد الروقي:</span> الله يوفقك، الدورة غيرت مفاهيمي</div>
+            <div class="comment-item"><span>نواف:</span> يوزر تيك توك فخم، ما قصرت يا غالي</div>
+            <div class="comment-item"><span>تركي:</span> خدمة 5 نجوم وربي</div>
+            <div class="comment-item"><span>محمد:</span> السعر بطل والخدمة ابطل</div>
+            <div class="comment-item"><span>يوسف:</span> الدورة واضحة حتى للي ما يفهم بالتقنية</div>
+            <div class="comment-item"><span>فهد السهلي:</span> تم النقل بثواني، صادق وواضح</div>
+            <div class="comment-item"><span>سعود:</span> اشكرك على سعة صدرك وتعاملك الطيب</div>
+            <div class="comment-item"><span>ريان:</span> يوزر ثلاثي لقطة، الله يسعدك</div>
+            <div class="comment-item"><span>طلال:</span> ميزة سعود إنه يشرح لك كل شي بالتفصيل</div>
+            <div class="comment-item"><span>عمر:</span> السناب فك SS06 جهازي رجع حي</div>
+            <div class="comment-item"><span>بدر:</span> انصح الجميع بالتعامل مع سعود بدون تردد</div>
+            <div class="comment-item"><span>فارس:</span> دورة الهكر الاخلاقي عند سعود هي الصح</div>
+            <div class="comment-item"><span>سطام:</span> الله يبيض وجهك يالامير</div>
+            <div class="comment-item"><span>سلمان:</span> يوزرات نادرة وسعرها فيها</div>
+            <div class="comment-item"><span>راكان:</span> تسلم يمينك يا سعود، ما قصرت</div>
+            <div class="comment-item"><span>منصور:</span> افضل متجر خدمات رقمية بلا منازع</div>
+            <div class="comment-item"><span>أبو سارة:</span> الله يبارك لك في حلالك، شغل نظيف</div>
+            <div class="comment-item"><span>وليد:</span> يوزر ثنائي تيك توك فخمممم</div>
+            <div class="comment-item"><span>هاني:</span> دورة ممتازة ودعم فني مستمر</div>
+            <div class="comment-item"><span>ثامر:</span> تم فك حظر حسابي القديم، ممتن لك</div>
+            <div class="comment-item"><span>سامي:</span> فزعة ومرجلة، هذا سعود</div>
+            <div class="comment-item"><span>خالد:</span> تعاملت معه مرتين وكلها تمام</div>
+            <div class="comment-item"><span>جابر:</span> اشهد بالله انه ثقة</div>
+            <div class="comment-item"><span>علي:</span> جودة وسرعة، اهنيك</div>
+            <div class="comment-item"><span>مشعل:</span> السناب شغال الحين مية مية</div>
+            <div class="comment-item"><span>ابو محمد:</span> تستاهل كل خير يا سعود</div>
+            <div class="comment-item"><span>حمود:</span> شغل احترافي ورسمي</div>
+            <div class="comment-item"><span>فايز:</span> ما ندمت اني شريت من عندك</div>
+            <div class="comment-item"><span>مساعد:</span> انصح بالدورة للي يبي يتعلم صدق</div>
+            <div class="comment-item"><span>سلطان:</span> يوزر ثلاثي لقطة وربي</div>
+            <div class="comment-item"><span>احمد:</span> شكرا لك من القلب</div>
+        </div>
+    </div>
+
+    <div class="flex justify-center mt-6">
+        <div class="bg-slate-800/50 backdrop-blur px-4 py-2 rounded-full border border-slate-700 flex items-center gap-2">
+            <div class="flex text-yellow-400">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <span class="text-sm font-bold">4.9/5</span>
+            <span class="text-xs text-slate-400 border-r border-slate-600 pr-2 mr-1">أكثر من 2,500 عميل راضٍ</span>
+        </div>
+    </div>
+
+    <header class="pt-10 pb-16 px-4 text-center">
+        <div class="mb-6 flex justify-center">
+            <div class="w-28 h-28 bg-blue-600 rounded-full flex items-center justify-center glow-logo border-4 border-slate-900">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+            </div>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl font-black mb-4 tracking-tight text-white">
+            متجر <span class="text-blue-500">أ.سعود</span>
+        </h1>
+        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">الوجهة الأولى والأضمن لخدمات فك الحظر واليوزرات النادرة.</p>
+
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#store" class="px-8 py-4 bg-slate-800 text-white font-bold rounded-full border border-slate-700 hover:bg-slate-700 transition-all">المتجر</a>
+            <a href="register.html?item=دورة الاختراق الأخلاقي&price=800" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-full shadow-lg hover:shadow-blue-500/50 transition-all">اشتراك بالدورة (800 ريال)</a>
+        </div>
+    </header>
+
+    <section id="store" class="max-w-6xl mx-auto px-6 pb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="glass-card p-6 rounded-3xl flex flex-col">
+            <div class="w-12 h-12 bg-yellow-500/20 text-yellow-500 rounded-2xl flex items-center justify-center mb-6">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-1">فك حظر سناب</h3>
+            <p class="text-slate-400 text-xs mb-4 flex-grow">فك الحظر الدائم والجهاز بشكل رسمي.</p>
+            <div class="text-xl font-black text-blue-400 mb-4">150 ريال</div>
+            <a href="register.html?item=خدمة فك حظر سناب&price=150" class="btn-action block text-center py-2.5 rounded-xl font-bold text-sm">شراء فوري</a>
+        </div>
+
+        <div class="glass-card p-6 rounded-3xl flex flex-col">
+            <div class="w-12 h-12 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-6">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-1">تيك توك ثلاثي</h3>
+            <p class="text-slate-400 text-xs mb-4 flex-grow">يوزرات مميزة وقصيرة مع الأساسي.</p>
+            <div class="text-xl font-black text-blue-400 mb-4">280 ريال</div>
+            <a href="register.html?item=يوزر تيك توك ثلاثي&price=280" class="btn-action block text-center py-2.5 rounded-xl font-bold text-sm">شراء فوري</a>
+        </div>
+
+        <div class="glass-card p-6 rounded-3xl flex flex-col border-blue-500/20 shadow-lg">
+            <div class="w-12 h-12 bg-blue-500/20 text-blue-500 rounded-2xl flex items-center justify-center mb-6">
+                <span class="font-black text-lg">2D</span>
+            </div>
+            <h3 class="text-xl font-bold mb-1">تيك توك ثنائي</h3>
+            <p class="text-slate-400 text-xs mb-4 flex-grow">يوزرات VIP نادرة جداً للمشاهير.</p>
+            <div class="text-xl font-black text-white mb-4">350 ريال</div>
+            <a href="register.html?item=يوزر تيك توك ثنائي&price=350" class="btn-action block text-center py-2.5 rounded-xl font-bold text-sm">شراء فوري</a>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-slate-600 text-xs">
+        <p>© 2026 جميع الحقوق محفوظة لمتجر سعود</p>
+    </footer>
+
+</body>
+</html>
