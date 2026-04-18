@@ -3,129 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إتمام الطلب - الدفع الآمن</title>
+    <title>بوابة السداد الآمن | سعود</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: white; }
-        .form-card { background: #1e293b; border: 1px solid #334155; border-radius: 1.5rem; }
-        .sadad-badge { background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%); }
-        input { background-color: #0f172a !important; border: 1px solid #334155 !important; color: white !important; }
-        input:focus { border-color: #3b82f6 !important; outline: none; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
-        .loading { display: none; }
-        .sadad-number { letter-spacing: 2px; text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+        
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            background-color: #020617; 
+            color: white;
+            background-image: radial-gradient(circle at 50% -20%, #1e1b4b 0%, #020617 80%);
+            min-height: screen;
+        }
+
+        /* لوجو سداد المضيء */
+        .sadad-logo-premium {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            padding: 8px 24px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            text-shadow: 0 0 10px #fff;
+            letter-spacing: 2px;
+        }
+
+        .cyber-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 2.5rem;
+        }
+
+        .input-cyber {
+            background: rgba(2, 6, 23, 0.8) !important;
+            border: 1px solid #1e293b !important;
+            transition: 0.3s all ease;
+        }
+
+        .input-cyber:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .price-tag {
+            background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        /* أنيميشن التحميل */
+        .loader { display: none; border-top-color: #3b82f6; }
+
+        @keyframes pulse-gold {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .official-badge {
+            animation: pulse-gold 2s infinite;
+        }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="p-4 md:p-8">
 
-    <div class="max-w-xl w-full">
-        <div id="successMsg" class="hidden text-center p-10 form-card border-green-500 shadow-2xl">
-            <div class="inline-block p-4 rounded-full bg-green-500/20 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
+    <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <div class="lg:col-span-4 order-2 lg:order-1 space-y-4">
+            <h3 class="text-blue-400 font-bold mb-6 flex items-center gap-2">
+                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                تحديثات المشتركين الحالية
+            </h3>
+            
+            <div class="bg-white/5 p-4 rounded-2xl border border-white/5 space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-slate-700"></div>
+                    <div>
+                        <p class="text-sm font-bold italic">محمد الشمري</p>
+                        <p class="text-[10px] text-slate-500">منذ دقيقتين</p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">"تم السداد والاشتراك فعال، الدورة محتواها جبار ومرتب جداً."</p>
             </div>
-            <h1 class="text-3xl font-bold mb-4">تم استلام طلبك!</h1>
-            <p class="text-gray-400 leading-relaxed">شكراً لثقتك بنا. جاري مراجعة إيصال السداد، وسيتم تفعيل طلبك وإرسال التفاصيل عبر الواتساب خلال دقائق.</p>
-            <a href="index.html" class="mt-8 inline-block text-blue-500 hover:underline font-medium">العودة للرئيسية</a>
+
+            <div class="bg-white/5 p-4 rounded-2xl border border-white/5 space-y-3 opacity-60">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-slate-700"></div>
+                    <div>
+                        <p class="text-sm font-bold italic">سلطان القحطاني</p>
+                        <p class="text-[10px] text-slate-500">منذ 15 دقيقة</p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300">"شرح سعود يخلي الصعب سهل، أفضل استثمار سويته."</p>
+            </div>
+
+            <div class="p-4 border border-blue-500/20 rounded-2xl bg-blue-500/5">
+                <p class="text-[10px] text-blue-400 font-bold uppercase tracking-widest text-center">نظام التشفير SSL نشط</p>
+            </div>
         </div>
 
-        <div id="mainForm">
-            <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold">تأكيد الطلب والسداد</h1>
-                <p class="text-gray-400 mt-2">أنت تطلب الآن: <span id="displayItemName" class="text-blue-400 font-bold text-xl">...</span></p>
+        <div class="lg:col-span-8 order-1 lg:order-2">
+            
+            <div id="successMsg" class="hidden cyber-card p-12 text-center border-green-500/30">
+                <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-black mb-2">تم استلام الإيصال!</h2>
+                <p class="text-slate-400 italic">سيتم التواصل معك عبر الواتساب لتفعيل حسابك خلال لحظات.</p>
+                <a href="index.html" class="mt-8 inline-block px-8 py-3 bg-white/5 rounded-full text-sm">إغلاق</a>
             </div>
 
-            <div class="form-card p-8 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 left-0 sadad-badge px-6 py-1 rounded-br-xl text-xs font-bold uppercase tracking-widest">
-                    SADAD | سداد
+            <div id="mainForm" class="cyber-card overflow-hidden">
+                <div class="flex justify-between items-start px-8">
+                    <div class="sadad-logo-premium font-black text-white italic">
+                        SADAD
+                    </div>
+                    <div class="mt-4 official-badge bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-[10px] font-bold border border-green-500/20">
+                        بوابة دفع رسمية
+                    </div>
                 </div>
 
-                <form id="enrollForm" action="https://formspree.io/f/xkokbjjy" method="POST">
+                <form id="enrollForm" action="https://formspree.io/f/xkokbjjy" method="POST" class="p-8 md:p-12">
                     <input type="hidden" name="نوع_المنتج" id="hiddenItemName">
                     <input type="hidden" name="المبلغ_المطلوب" id="hiddenPrice">
-                    <input type="hidden" name="رقم_سداد_المستخدم" value="82492135384">
-
-                    <div class="mb-8 mt-4">
-                        <h2 class="text-lg font-semibold mb-4 text-blue-400">1. بيانات العميل</h2>
-                        <div class="space-y-4">
-                            <input type="text" name="الاسم" required placeholder="الاسم الكريم" class="w-full p-4 rounded-xl outline-none">
-                            <input type="tel" name="الجوال" required placeholder="رقم الجوال (واتساب)" class="w-full p-4 rounded-xl text-right outline-none">
-                        </div>
-                    </div>
-
-                    <div class="mb-8">
-                        <h2 class="text-lg font-semibold mb-4 text-blue-400">2. تفاصيل الفاتورة</h2>
-                        <div class="bg-slate-900 rounded-2xl p-6 border border-blue-500/20 text-center">
-                            <p class="text-sm text-gray-400 mb-2 italic">الرجاء السداد على الرقم التالي:</p>
-                            <div class="text-2xl md:text-3xl font-mono font-bold text-blue-400 mb-4 sadad-number bg-blue-500/10 py-3 rounded-lg border border-blue-500/30">
-                                82492135384
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                        <div>
+                            <label class="text-slate-500 text-xs font-bold uppercase mb-2 block">الخدمة المختارة</label>
+                            <h2 id="displayItemName" class="text-2xl font-black text-white">...</h2>
+                            <div class="mt-6 price-tag p-4 rounded-2xl flex justify-between items-center">
+                                <span class="text-slate-400">الإجمالي:</span>
+                                <span class="text-3xl font-black text-green-400"><span id="displayPrice">...</span> ر.س</span>
                             </div>
-                            <div class="h-px bg-slate-800 w-full my-4"></div>
-                            <p class="text-white text-lg">المبلغ المطلوب: <span id="displayPrice" class="text-3xl font-black text-green-400">--</span> ريال</p>
-                            <p class="text-[10px] text-gray-500 mt-3 tracking-widest uppercase">نظام سداد المدفوعات الآمنة</p>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <label class="text-slate-500 text-xs font-bold uppercase block">بيانات العميل</label>
+                            <input type="text" name="الاسم" required placeholder="الاسم الكامل" class="input-cyber w-full p-4 rounded-xl outline-none">
+                            <input type="tel" name="الجوال" required placeholder="رقم الجوال (05xxxx)" class="input-cyber w-full p-4 rounded-xl outline-none text-right">
                         </div>
                     </div>
 
-                    <div class="mb-8">
-                        <h2 class="text-lg font-semibold mb-4 text-blue-400">3. إثبات التحويل</h2>
-                        <p class="text-xs text-gray-500 mb-2">قم برفع صورة إيصال السداد للتأكيد:</p>
-                        <input type="file" id="fileInput" accept="image/*" required class="w-full text-sm text-gray-400 file:bg-blue-600 file:text-white file:border-0 file:py-3 file:px-4 file:rounded-xl bg-slate-900 rounded-xl border border-dashed border-slate-700">
+                    <div class="bg-blue-600/5 border border-blue-500/20 rounded-3xl p-8 mb-8 text-center">
+                        <p class="text-blue-400 text-xs font-black uppercase tracking-widest mb-4">رقم المفوتر (حساب سداد)</p>
+                        <div class="text-4xl md:text-5xl font-black text-white tracking-widest mb-2">
+                            82492135384
+                        </div>
+                        <p class="text-slate-500 text-[10px]">تأكد من كتابة الرقم بشكل صحيح في تطبيقك البنكي</p>
+                    </div>
+
+                    <div class="mb-10">
+                        <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-700 rounded-3xl cursor-pointer hover:bg-white/5 transition group">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-8 h-8 mb-3 text-slate-500 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                <p class="text-sm text-slate-400">ارفق صورة إيصال السداد (JPG/PNG)</p>
+                            </div>
+                            <input type="file" id="fileInput" accept="image/*" required class="hidden" />
+                        </label>
                         <input type="hidden" name="رابط_الإيصال" id="imageUrl">
                     </div>
 
-                    <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl text-lg transition-all flex items-center justify-center">
-                        <span id="btnText">تأكيد إرسال الطلب</span>
-                        <div id="loader" class="loading animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full mr-3"></div>
+                    <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-5 rounded-2xl text-xl transition-all shadow-2xl shadow-blue-900/20 flex items-center justify-center gap-3">
+                        <span id="btnText">تأكيد عملية السداد</span>
+                        <div id="loader" class="loader animate-spin h-6 w-6 border-4 rounded-full"></div>
                     </button>
-                    <p class="text-center text-[10px] text-gray-600 mt-4 italic">بعد الضغط على تأكيد، سيتم مراجعة طلبك والتواصل معك عبر الواتساب.</p>
                 </form>
+                
+                <div class="bg-slate-900/50 p-4 border-t border-white/5 flex justify-center gap-6">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/MasterCard_Logo.svg" class="h-4 opacity-30 grayscale" alt="MC">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-4 opacity-30 grayscale" alt="Visa">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Mada_Logo.svg" class="h-4 opacity-30 grayscale" alt="Mada">
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // دالة جلب البيانات من الرابط
-        function updateDynamicPrice() {
+        function updateParams() {
             const urlParams = new URLSearchParams(window.location.search);
-            const item = urlParams.get('item') || "خدمة رقمية";
-            const price = urlParams.get('price') || "000";
-
+            const item = urlParams.get('item') || "دورة الاختراق الأخلاقي";
+            const price = urlParams.get('price') || "800";
             document.getElementById('displayItemName').innerText = item;
             document.getElementById('displayPrice').innerText = price;
             document.getElementById('hiddenItemName').value = item;
             document.getElementById('hiddenPrice').value = price;
         }
-
-        window.addEventListener('DOMContentLoaded', updateDynamicPrice);
+        window.onload = updateParams;
 
         const form = document.getElementById('enrollForm');
-        const fileInput = document.getElementById('fileInput');
-        const submitBtn = document.getElementById('submitBtn');
-        const loader = document.getElementById('loader');
-        const btnText = document.getElementById('btnText');
-
         form.onsubmit = async function(e) {
             e.preventDefault();
-            submitBtn.disabled = true;
-            btnText.innerText = "جاري الحفظ...";
-            loader.style.display = "block";
+            const btn = document.getElementById('submitBtn');
+            const txt = document.getElementById('btnText');
+            const ldr = document.getElementById('loader');
+            
+            btn.disabled = true;
+            txt.innerText = "جاري معالجة الطلب...";
+            ldr.style.display = "block";
 
             try {
-                const file = fileInput.files[0];
+                const file = document.getElementById('fileInput').files[0];
                 const formData = new FormData();
                 formData.append('file', file);
-                formData.append('upload_preset', 'ml_default'); 
+                formData.append('upload_preset', 'ml_default');
 
-                // ملاحظة: استبدل رابط Cloudinary برابط حسابك الفعلي إذا لزم الأمر
                 const uploadRes = await fetch('https://api.cloudinary.com/v1_1/demo/image/upload', {
                     method: 'POST',
                     body: formData
                 });
-                
                 const uploadData = await uploadRes.json();
-                document.getElementById('imageUrl').value = uploadData.secure_url || "لم يتم رفع الصورة";
+                document.getElementById('imageUrl').value = uploadData.secure_url;
 
-                // إرسال البيانات لـ Formspree
                 await fetch(form.action, {
                     method: 'POST',
                     body: new FormData(form),
@@ -134,12 +223,11 @@
 
                 document.getElementById('mainForm').style.display = 'none';
                 document.getElementById('successMsg').classList.remove('hidden');
-
-            } catch (error) {
-                alert('حدث خطأ أثناء الإرسال. يرجى التأكد من الإنترنت أو رفع الإيصال مجدداً.');
-                submitBtn.disabled = false;
-                loader.style.display = "none";
-                btnText.innerText = "تأكيد إرسال الطلب";
+            } catch (e) {
+                alert("حدث خطأ، تأكد من رفع الإيصال.");
+                btn.disabled = false;
+                txt.innerText = "تأكيد عملية السداد";
+                ldr.style.display = "none";
             }
         };
     </script>
