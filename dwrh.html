@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <meta name="google" content="notranslate">
     <meta charset="UTF-8">
-    <title>تسجيل الدخول</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة الوصول</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #020617; font-family: 'Tajawal', sans-serif; }
+    </style>
 </head>
-<body class="bg-slate-950 text-white flex items-center justify-center h-screen">
-    <div class="bg-slate-900 p-8 rounded-3xl border border-blue-500/20 w-80">
-        <h2 class="text-center mb-6 font-bold">بوابة المشتركين</h2>
-        <input type="text" id="user" placeholder="رقم الجوال" class="w-full p-3 mb-4 rounded-xl bg-black border border-slate-800 text-white outline-none">
-        <input type="password" id="pass" placeholder="كلمة المرور" class="w-full p-3 mb-6 rounded-xl bg-black border border-slate-800 text-white outline-none">
-        <button onclick="login()" class="w-full bg-blue-600 p-3 rounded-xl font-bold">دخول</button>
+<body class="flex items-center justify-center min-h-screen">
+
+    <div class="bg-slate-900/50 p-10 rounded-[2.5rem] border border-blue-500/20 shadow-2xl w-full max-w-sm">
+        <h2 class="text-2xl font-black text-white text-center mb-8 italic">تسجيل دخول</h2>
+        
+        <input type="text" id="u" placeholder="رقم الجوال" class="w-full bg-black/50 border border-slate-800 p-4 rounded-2xl text-white mb-4 outline-none focus:border-blue-500">
+        <input type="password" id="p" placeholder="كلمة المرور" class="w-full bg-black/50 border border-slate-800 p-4 rounded-2xl text-white mb-8 outline-none focus:border-blue-500">
+        
+        <button onclick="doLogin()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-2xl transition-all">دخول</button>
     </div>
 
     <script>
-        function login() {
-            const u = document.getElementById('user').value;
-            const p = document.getElementById('pass').value;
-            
-            // استبدل الرقم والباسورد بما تريد
-            if(u === "0500000000" && p === "123456") {
+        function doLogin() {
+            const user = document.getElementById('u').value;
+            const pass = document.getElementById('p').value;
+
+            // عدل البيانات هنا كما تحب
+            if(user === "0500000000" && pass === "1234") {
                 localStorage.setItem('isLogged', 'true');
-                localStorage.setItem('userPhone', u); // لحفظ رقم المشترك للعلامة المائية
-                window.location.href = "dwrh.html"; // سينقلك للصفحة ولن تطردك
+                localStorage.setItem('userPhone', user);
+                window.location.href = "dwrh.html"; // تأكد أن الاسم مطابق لملفك في قيت هاب
             } else {
-                alert("بيانات خاطئة");
+                alert("البيانات غير صحيحة");
             }
         }
     </script>
