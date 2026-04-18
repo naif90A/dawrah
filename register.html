@@ -13,7 +13,7 @@
             background-color: #020617; 
             color: white;
             background-image: radial-gradient(circle at 50% -20%, #1e1b4b 0%, #020617 80%);
-            overflow-x: hidden;
+            min-height: 100vh;
         }
 
         .sadad-logo-premium {
@@ -37,44 +37,41 @@
             background: rgba(2, 6, 23, 0.8) !important;
             border: 1px solid #1e293b !important;
             color: white !important;
+            transition: 0.3s;
         }
 
-        /* نظام الإشعارات الحية */
-        #live-notification {
-            position: fixed;
-            bottom: 20px;
-            right: -400px; /* مختفي في البداية */
-            z-index: 9999;
-            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        .input-cyber:focus { border-color: #3b82f6 !important; box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+
+        /* نبض الحالة الحية */
+        .live-pulse {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse-green 2s infinite;
         }
 
-        #live-notification.show { right: 20px; }
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
 
-        .notif-card {
-            background: rgba(30, 41, 59, 0.95);
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* أنيميشن دخول النشاط */
+        .activity-entry {
+            animation: slideInUp 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
-
-    <div id="live-notification">
-        <div class="notif-card p-4 rounded-2xl flex items-center gap-4 w-[320px]">
-            <div class="relative">
-                <div class="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center border border-blue-500/30">
-                    <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
-                </div>
-                <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-slate-900 rounded-full"></div>
-            </div>
-            <div class="flex-1">
-                <p class="text-xs font-bold text-blue-400" id="notif-name">جاري التحديث...</p>
-                <p class="text-[11px] text-slate-200 mt-1" id="notif-text">تم الاشتراك في الدورة</p>
-                <p class="text-[9px] text-slate-500 mt-1 italic" id="notif-time">الآن</p>
-            </div>
-        </div>
-    </div>
 
     <div class="max-w-4xl mx-auto">
         
@@ -84,52 +81,71 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                 </svg>
             </div>
-            <h2 class="text-3xl font-black mb-2 text-white">تم استلام الإيصال!</h2>
-            <p class="text-slate-400">سيتم تفعيل حسابك خلال دقائق، انتظر رسالة الواتساب.</p>
-            <a href="index.html" class="mt-8 inline-block px-8 py-3 bg-white/5 rounded-full text-sm">العودة</a>
+            <h2 class="text-3xl font-black mb-2">تم استلام الإيصال!</h2>
+            <p class="text-slate-400">جاري تفعيل حسابك، سيصلك إشعار عبر الواتساب فوراً.</p>
+            <a href="index.html" class="mt-8 inline-block px-8 py-2 bg-white/5 rounded-full text-xs">إغلاق</a>
         </div>
 
-        <div id="mainForm" class="cyber-card overflow-hidden shadow-2xl">
-            <div class="flex justify-between items-start px-8">
-                <div class="sadad-logo-premium font-black text-white italic">SADAD</div>
-                <div class="mt-4 bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-[10px] font-bold border border-green-500/20">بوابة دفع آمنة</div>
+        <div id="mainForm">
+            <div class="cyber-card overflow-hidden shadow-2xl mb-8">
+                <div class="flex justify-between items-start px-8">
+                    <div class="sadad-logo-premium font-black text-white italic">SADAD</div>
+                    <div class="mt-4 bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-[10px] font-bold border border-green-500/20 uppercase tracking-widest">Secure Gateway</div>
+                </div>
+
+                <form id="enrollForm" action="https://formspree.io/f/xkokbjjy" method="POST" class="p-8 md:p-12">
+                    <input type="hidden" name="نوع_المنتج" id="hiddenItemName">
+                    <input type="hidden" name="المبلغ_المطلوب" id="hiddenPrice">
+                    
+                    <div class="text-center mb-10">
+                        <h2 id="displayItemName" class="text-3xl font-black text-white mb-2 italic">دورة الاختراق الأخلاقي</h2>
+                        <div class="inline-flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-full border border-white/5">
+                            <span class="text-slate-400 text-sm italic">المبلغ:</span>
+                            <span class="text-green-400 font-black text-xl"><span id="displayPrice">800</span> ر.س</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <input type="text" name="الاسم" required placeholder="الاسم الكريم" class="input-cyber w-full p-4 rounded-2xl outline-none">
+                        <input type="tel" name="الجوال" required placeholder="رقم الواتساب" class="input-cyber w-full p-4 rounded-2xl outline-none text-right">
+                    </div>
+
+                    <div class="bg-blue-600/5 border border-blue-500/20 rounded-3xl p-6 mb-8 text-center relative">
+                        <p class="text-blue-400 text-[10px] font-black uppercase tracking-widest mb-3">حساب سداد المعتمد</p>
+                        <div class="text-4xl md:text-5xl font-black text-white tracking-widest mb-2 font-mono">82492135384</div>
+                        <p class="text-slate-500 text-[10px]">قم بالتحويل لهذا الرقم ثم ارفع الإيصال أدناه</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-800 rounded-3xl cursor-pointer hover:bg-white/5 transition group">
+                            <svg class="w-6 h-6 mb-2 text-slate-600 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                            <p class="text-xs text-slate-500">ارفع إثبات السداد هنا (صورة)</p>
+                            <input type="file" id="fileInput" accept="image/*" required class="hidden" />
+                        </label>
+                        <input type="hidden" name="رابط_الإيصال" id="imageUrl">
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-5 rounded-2xl text-xl transition-all shadow-2xl">إتمام عملية الاشتراك</button>
+                </form>
             </div>
 
-            <form id="enrollForm" action="https://formspree.io/f/xkokbjjy" method="POST" class="p-8 md:p-12">
-                <input type="hidden" name="نوع_المنتج" id="hiddenItemName">
-                <input type="hidden" name="المبلغ_المطلوب" id="hiddenPrice">
+            <div class="cyber-card p-6 md:p-8">
+                <div class="flex items-center justify-between mb-6 border-b border-white/5 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="live-pulse"></div>
+                        <h3 class="font-bold text-sm text-slate-300">سجل النشاط المباشر (Live Status)</h3>
+                    </div>
+                    <span class="text-[10px] text-slate-500 font-mono uppercase">Server: Riyadh-01</span>
+                </div>
                 
-                <div class="text-center mb-10">
-                    <h2 id="displayItemName" class="text-3xl font-black text-white mb-2">...</h2>
-                    <p class="text-green-400 font-bold">المبلغ المطلوب سداده: <span id="displayPrice">...</span> ريال</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <input type="text" name="الاسم" required placeholder="الاسم الكامل" class="input-cyber w-full p-4 rounded-xl outline-none">
-                    <input type="tel" name="الجوال" required placeholder="رقم الجوال (واتساب)" class="input-cyber w-full p-4 rounded-xl outline-none text-right">
-                </div>
-
-                <div class="bg-blue-600/5 border border-blue-500/20 rounded-3xl p-8 mb-8 text-center">
-                    <p class="text-blue-400 text-xs font-black uppercase mb-4">رقم المفوتر (حساب سداد)</p>
-                    <div class="text-4xl md:text-5xl font-black text-white tracking-widest mb-2">82492135384</div>
-                    <p class="text-slate-500 text-[10px]">انسخ الرقم وسدد عبر تطبيقك البنكي</p>
-                </div>
-
-                <div class="mb-8">
-                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-700 rounded-3xl cursor-pointer hover:bg-white/5 transition">
-                        <p class="text-sm text-slate-400">ارفق صورة إيصال السداد هنا</p>
-                        <input type="file" id="fileInput" accept="image/*" required class="hidden" />
-                    </label>
-                    <input type="hidden" name="رابط_الإيصال" id="imageUrl">
-                </div>
-
-                <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-5 rounded-2xl text-xl shadow-2xl transition-all">تأكيد وإرسال الطلب</button>
-            </form>
+                <div id="activity-feed" class="space-y-4">
+                    </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // 1. نظام جلب البيانات
+        // 1. جلب البيانات من الرابط
         function updateParams() {
             const urlParams = new URLSearchParams(window.location.search);
             document.getElementById('displayItemName').innerText = urlParams.get('item') || "دورة الاختراق الأخلاقي";
@@ -139,49 +155,48 @@
         }
         window.onload = updateParams;
 
-        // 2. نظام الإشعارات الحية (100+ تعليق)
-        const firstNames = ["أحمد", "فهد", "سارة", "خالد", "نورة", "عبدالرحمن", "فيصل", "هيا", "بندر", "محمد", "مشاري", "سلطان", "عمر", "إبراهيم", "عزوز", "تركي", "منصور", "وليد", "ماجد", "ياسر"];
-        const lastNames = ["الشمري", "العتيبي", "القحطاني", "الدوسري", "الروقي", "المطيري", "العنزي", "السبيعي", "الحربي", "الغامدي", "الزهراني", "الشهري", "عسيري", "تميم", "الرشدان"];
-        const comments = [
-            "تم السداد، الحماس ألف للدورة!",
-            "أقسم بالله هالدورة انقذتني، كنت أدورها من زمان.",
-            "أفضل استثمار سويته بـ 2026 للأمانة.",
-            "توني اشتركت، نظام سداد جداً مريح.",
-            "الدورة هذي كنز لكل واحد يبي يتعلم أمن سيبراني.",
-            "شكراً سعود على هذا المحتوى الجبار.",
-            "تم التحويل بانتظار التفعيل يا بطل.",
-            "والله الشرح يبرد الكبد، ما ندمت أبداً.",
-            "أنصح كل اللي متردد يشترك فوراً.",
-            "بديت أطبق الدروس والنتيجة خيالية!",
-            "أخيراً لقيت دورة تشرح العملي بوضوح.",
-            "سعود فخر لنا، دورة ولا غلطة.",
-            "تم الدفع، الله يبارك لك في علمك.",
-            "محتوى احترافي وسعر جداً مناسب.",
-            "انقذتني من ضياع الدورات الأجنبية."
-        ];
+        // 2. نظام النشاط الحي العشوائي
+        const fNames = ["أحمد", "فهد", "عبدالله", "مشاري", "سلطان", "تركي", "خالد", "ياسر", "فيصل", "منصور", "بندر", "ماجد", "صالح", "إبراهيم", "نواف"];
+        const lNames = ["العتيبي", "الشمري", "القحطاني", "الدوسري", "المطيري", "العنزي", "الحربي", "الروقي", "الشهري", "الغامدي", "عسيري", "السبيعي", "المالكي"];
 
-        function showNotification() {
-            const name = firstNames[Math.floor(Math.random()*firstNames.length)] + " " + lastNames[Math.floor(Math.random()*lastNames.length)];
-            const comment = comments[Math.floor(Math.random()*comments.length)];
-            const times = ["الآن", "منذ دقيقة", "منذ 3 دقائق", "منذ 5 دقائق"];
+        function createActivity() {
+            const feed = document.getElementById('activity-feed');
+            const name = fNames[Math.floor(Math.random()*fNames.length)] + " " + lNames[Math.floor(Math.random()*lNames.length)];
+            const course = document.getElementById('displayItemName').innerText;
+            const minutes = [1, 2, 3, 5, 8][Math.floor(Math.random()*5)];
             
-            document.getElementById('notif-name').innerText = name;
-            document.getElementById('notif-text').innerText = comment;
-            document.getElementById('notif-time').innerText = times[Math.floor(Math.random()*times.length)];
-            
-            const notif = document.getElementById('live-notification');
-            notif.classList.add('show');
-            
-            setTimeout(() => {
-                notif.classList.remove('show');
-            }, 6000); // يختفي بعد 6 ثواني
+            const entry = document.createElement('div');
+            entry.className = 'activity-entry flex items-center justify-between bg-white/5 p-4 rounded-2xl border border-white/5';
+            entry.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-600/10 flex items-center justify-center text-blue-500">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-white italic">تم قبول اشتراك ${name}</p>
+                        <p class="text-[10px] text-slate-500">تم التحقق من إيصال سداد ${course}</p>
+                    </div>
+                </div>
+                <div class="text-[10px] text-green-500 font-bold bg-green-500/10 px-2 py-1 rounded-md">منذ ${minutes} دقيقة</div>
+            `;
+
+            // إضافة في البداية وحذف القديم إذا تجاوز 4 سجلات
+            feed.prepend(entry);
+            if(feed.children.length > 4) {
+                feed.lastElementChild.remove();
+            }
+
+            // جدولة الإشعار القادم بوقت عشوائي (بين 30 ثانية و 3 دقائق)
+            const nextDelay = Math.floor(Math.random() * (180000 - 30000 + 1)) + 30000;
+            setTimeout(createActivity, nextDelay);
         }
 
-        // إطلاق إشعار كل 15 ثانية (يمكنك تغييرها لـ 5 دقائق كما طلبت)
-        setInterval(showNotification, 15000); 
-        setTimeout(showNotification, 3000); // أول إشعار بعد 3 ثواني من فتح الصفحة
+        // إطلاق أول 3 نشاطات فوراً لإعطاء انطباع بالامتلاء
+        setTimeout(createActivity, 1000);
+        setTimeout(createActivity, 2500);
+        setTimeout(createActivity, 5000);
 
-        // 3. معالجة النموذج (Formspree & Cloudinary)
+        // 3. معالجة السداد (Cloudinary + Formspree)
         const form = document.getElementById('enrollForm');
         form.onsubmit = async function(e) {
             e.preventDefault();
@@ -196,8 +211,7 @@
                 formData.append('upload_preset', 'ml_default');
 
                 const uploadRes = await fetch('https://api.cloudinary.com/v1_1/demo/image/upload', {
-                    method: 'POST',
-                    body: formData
+                    method: 'POST', body: formData
                 });
                 const uploadData = await uploadRes.json();
                 document.getElementById('imageUrl').value = uploadData.secure_url;
@@ -210,10 +224,11 @@
 
                 document.getElementById('mainForm').style.display = 'none';
                 document.getElementById('successMsg').classList.remove('hidden');
-            } catch (e) {
-                alert("خطأ في الاتصال، حاول مجدداً.");
+                window.scrollTo(0,0);
+            } catch (err) {
+                alert("يرجى رفع الإيصال والمحاولة مرة أخرى.");
                 btn.disabled = false;
-                btn.innerText = "تأكيد وإرسال الطلب";
+                btn.innerText = "إتمام عملية الاشتراك";
             }
         };
     </script>
