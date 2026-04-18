@@ -2,109 +2,31 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أكاديمية سعود | منصة الدورات</title>
+    <title>تسجيل الدخول</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
-        
-        body { 
-            font-family: 'Tajawal', sans-serif; 
-            background-color: #020617; 
-            color: white;
-            background-image: radial-gradient(circle at 50% -20%, #172554 0%, #020617 85%);
-            min-height: 100vh;
-            user-select: none; /* منع تحديد النصوص */
-        }
-
-        .course-card {
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(59, 130, 246, 0.1);
-            transition: all 0.4s ease;
-        }
-
-        .course-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        /* العلامة المائية المتحركة لحماية المحتوى */
-        #watermark {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0.1;
-            font-size: 3vw;
-            font-weight: 900;
-            color: white;
-            pointer-events: none;
-            z-index: 9999;
-            white-space: nowrap;
-        }
-    </style>
 </head>
-<body class="py-12 px-4">
-
-    <div id="watermark">SAUD ACADEMY - PRIVATE</div>
-
-    <div class="max-w-4xl mx-auto">
-        <header class="text-center mb-16">
-            <h1 class="text-4xl font-black mb-4 italic tracking-tighter">مرحباً بك في لوحة الدورات</h1>
-            <p class="text-slate-400">جميع مساراتك التعليمية مفعلة وجاهزة للمشاهدة</p>
-        </header>
-
-        <div class="grid grid-cols-1 gap-8">
-            
-            <div class="course-card p-6 md:p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 border border-white/5">
-                <div class="w-full md:w-40 h-40 bg-blue-600/10 rounded-3xl flex items-center justify-center border border-blue-500/20">
-                    <svg class="w-16 h-16 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                </div>
-                <div class="flex-1 text-center md:text-right">
-                    <h2 class="text-2xl font-black mb-3 text-white">دورة الاختراق الأخلاقي الكاملة</h2>
-                    <p class="text-slate-400 text-sm mb-6">المسار الشامل من الصفر إلى احتراق الأنظمة وتأمينها.</p>
-                    <a href="#" class="inline-block bg-blue-600 hover:bg-blue-500 px-8 py-3 rounded-2xl font-bold transition">مشاهدة الآن</a>
-                </div>
-            </div>
-
-            <div class="course-card p-6 md:p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 border border-white/5">
-                <div class="w-full md:w-40 h-40 bg-purple-600/10 rounded-3xl flex items-center justify-center border border-purple-500/20">
-                    <svg class="w-16 h-16 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                </div>
-                <div class="flex-1 text-center md:text-right">
-                    <h2 class="text-2xl font-black mb-3 text-white">تطوير أدوات الحماية بـ Python</h2>
-                    <p class="text-slate-400 text-sm mb-6">بناء سكربتات احترافية لأتمتة المهام الأمنية.</p>
-                    <a href="#" class="inline-block bg-white/5 hover:bg-white/10 px-8 py-3 rounded-2xl font-bold transition">قريباً</a>
-                </div>
-            </div>
-
-        </div>
+<body class="bg-slate-950 text-white flex items-center justify-center h-screen">
+    <div class="bg-slate-900 p-8 rounded-3xl border border-blue-500/20 w-80">
+        <h2 class="text-center mb-6 font-bold">بوابة المشتركين</h2>
+        <input type="text" id="user" placeholder="رقم الجوال" class="w-full p-3 mb-4 rounded-xl bg-black border border-slate-800 text-white outline-none">
+        <input type="password" id="pass" placeholder="كلمة المرور" class="w-full p-3 mb-6 rounded-xl bg-black border border-slate-800 text-white outline-none">
+        <button onclick="login()" class="w-full bg-blue-600 p-3 rounded-xl font-bold">دخول</button>
     </div>
 
     <script>
-        // 1. نظام الحماية من تسجيل الدخول
-        // إذا لم يسجل دخوله سيتم طرده لصفحة login.html
-        if(localStorage.getItem('isLogged') !== 'true') {
-            window.location.href = 'login.html';
-        }
-
-        // 2. تحديث العلامة المائية باسم المستخدم (رقمه)
-        const userNumber = localStorage.getItem('userPhone') || "GUEST";
-        document.getElementById('watermark').innerText = userNumber + " - PRIVATE CONTENT";
-
-        // 3. منع الكليك يمين واختصارات التفتيش (F12)
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) {
-                return false;
+        function login() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            
+            // استبدل الرقم والباسورد بما تريد
+            if(u === "0500000000" && p === "123456") {
+                localStorage.setItem('isLogged', 'true');
+                localStorage.setItem('userPhone', u); // لحفظ رقم المشترك للعلامة المائية
+                window.location.href = "dwrh.html"; // سينقلك للصفحة ولن تطردك
+            } else {
+                alert("بيانات خاطئة");
             }
-        };
-
-        // 4. تعتيم الصفحة إذا حاول المشترك تغيير التبويب (للتركيز)
-        window.onblur = function() { document.title = "عد للتعلم يا بطل!"; };
-        window.onfocus = function() { document.title = "أكاديمية سعود | منصة الدورات"; };
+        }
     </script>
 </body>
 </html>
