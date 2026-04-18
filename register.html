@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الطلب - الدفع الآمن</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: white; }
+        .form-card { background: #1e293b; border: 1px solid #334155; border-radius: 1.5rem; }
+        .sadad-badge { background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%); }
+        input { background-color: #0f172a !important; border: 1px solid #334155 !important; color: white !important; }
+        input:focus { border-color: #3b82f6 !important; outline: none; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
+        .loading { display: none; }
+        .sadad-number { letter-spacing: 2px; text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-xl w-full">
+        <div id="successMsg" class="hidden text-center p-10 form-card border-green-500 shadow-2xl">
+            <div class="inline-block p-4 rounded-full bg-green-500/20 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold mb-4">تم استلام طلبك!</h1>
+            <p class="text-gray-400 leading-relaxed">شكراً لثقتك بنا. جاري مراجعة إيصال السداد، وسيتم تفعيل طلبك وإرسال التفاصيل عبر الواتساب خلال دقائق.</p>
+            <a href="index.html" class="mt-8 inline-block text-blue-500 hover:underline font-medium">العودة للرئيسية</a>
+        </div>
+
+        <div id="mainForm">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold">تأكيد الطلب والسداد</h1>
+                <p class="text-gray-400 mt-2">أنت تطلب الآن: <span id="displayItemName" class="text-blue-400 font-bold text-xl">...</span></p>
+            </div>
+
+            <div class="form-card p-8 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 sadad-badge px-6 py-1 rounded-br-xl text-xs font-bold uppercase tracking-widest">
+                    SADAD | سداد
+                </div>
+
+                <form id="enrollForm" action="https://formspree.io/f/xkokbjjy" method="POST">
+                    <input type="hidden" name="نوع_المنتج" id="hiddenItemName">
+                    <input type="hidden" name="المبلغ_المطلوب" id="hiddenPrice">
+                    <input type="hidden" name="رقم_سداد_المستخدم" value="82492135384">
+
+                    <div class="mb-8 mt-4">
+                        <h2 class="text-lg font-semibold mb-4 text-blue-400">1. بيانات العميل</h2>
+                        <div class="space-y-4">
+                            <input type="text" name="الاسم" required placeholder="الاسم الكريم" class="w-full p-4 rounded-xl outline-none">
+                            <input type="tel" name="الجوال" required placeholder="رقم الجوال (واتساب)" class="w-full p-4 rounded-xl text-right outline-none">
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-lg font-semibold mb-4 text-blue-400">2. تفاصيل الفاتورة</h2>
+                        <div class="bg-slate-900 rounded-2xl p-6 border border-blue-500/20 text-center">
+                            <p class="text-sm text-gray-400 mb-2 italic">الرجاء السداد على الرقم التالي:</p>
+                            <div class="text-2xl md:text-3xl font-mono font-bold text-blue-400 mb-4 sadad-number bg-blue-500/10 py-3 rounded-lg border border-blue-500/30">
+                                82492135384
+                            </div>
+                            <div class="h-px bg-slate-800 w-full my-4"></div>
+                            <p class="text-white text-lg">المبلغ المطلوب: <span id="displayPrice" class="text-3xl font-black text-green-400">--</span> ريال</p>
+                            <p class="text-[10px] text-gray-500 mt-3 tracking-widest uppercase">نظام سداد المدفوعات الآمنة</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-lg font-semibold mb-4 text-blue-400">3. إثبات التحويل</h2>
+                        <p class="text-xs text-gray-500 mb-2">قم برفع صورة إيصال السداد للتأكيد:</p>
+                        <input type="file" id="fileInput" accept="image/*" required class="w-full text-sm text-gray-400 file:bg-blue-600 file:text-white file:border-0 file:py-3 file:px-4 file:rounded-xl bg-slate-900 rounded-xl border border-dashed border-slate-700">
+                        <input type="hidden" name="رابط_الإيصال" id="imageUrl">
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl text-lg transition-all flex items-center justify-center">
+                        <span id="btnText">تأكيد إرسال الطلب</span>
+                        <div id="loader" class="loading animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full mr-3"></div>
+                    </button>
+                    <p class="text-center text-[10px] text-gray-600 mt-4 italic">بعد الضغط على تأكيد، سيتم مراجعة طلبك والتواصل معك عبر الواتساب.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // دالة جلب البيانات من الرابط
+        function updateDynamicPrice() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const item = urlParams.get('item') || "خدمة رقمية";
+            const price = urlParams.get('price') || "000";
+
+            document.getElementById('displayItemName').innerText = item;
+            document.getElementById('displayPrice').innerText = price;
+            document.getElementById('hiddenItemName').value = item;
+            document.getElementById('hiddenPrice').value = price;
+        }
+
+        window.addEventListener('DOMContentLoaded', updateDynamicPrice);
+
+        const form = document.getElementById('enrollForm');
+        const fileInput = document.getElementById('fileInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const loader = document.getElementById('loader');
+        const btnText = document.getElementById('btnText');
+
+        form.onsubmit = async function(e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            btnText.innerText = "جاري الحفظ...";
+            loader.style.display = "block";
+
+            try {
+                const file = fileInput.files[0];
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', 'ml_default'); 
+
+                // ملاحظة: استبدل رابط Cloudinary برابط حسابك الفعلي إذا لزم الأمر
+                const uploadRes = await fetch('https://api.cloudinary.com/v1_1/demo/image/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const uploadData = await uploadRes.json();
+                document.getElementById('imageUrl').value = uploadData.secure_url || "لم يتم رفع الصورة";
+
+                // إرسال البيانات لـ Formspree
+                await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                document.getElementById('mainForm').style.display = 'none';
+                document.getElementById('successMsg').classList.remove('hidden');
+
+            } catch (error) {
+                alert('حدث خطأ أثناء الإرسال. يرجى التأكد من الإنترنت أو رفع الإيصال مجدداً.');
+                submitBtn.disabled = false;
+                loader.style.display = "none";
+                btnText.innerText = "تأكيد إرسال الطلب";
+            }
+        };
+    </script>
+</body>
+</html>
