@@ -3,149 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إتمام الطلب | OXR Secured Checkout</title>
+    <title>OXR | إتمام الطلب</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #050000;
-            color: white;
-            overflow-x: hidden;
-        }
-
-        .magma-bg {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% 100%, #450a0a 0%, #050000 80%);
-            z-index: -1;
-        }
-
-        /* حاوية الدفع الزجاجية المحترقة */
-        .checkout-card {
-            background: rgba(20, 5, 5, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 69, 0, 0.2);
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .checkout-card::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, transparent, #ff4500, transparent);
-            animation: rotate-border 6s linear infinite;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        @keyframes rotate-border {
-            100% { transform: rotate(360deg); }
-        }
-
-        .input-field {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 69, 0, 0.2);
-            color: white;
-            transition: 0.3s;
-        }
-
-        .input-field:focus {
-            border-color: #ff4500;
-            background: rgba(255, 69, 0, 0.1);
-            outline: none;
-            box-shadow: 0 0 15px rgba(255, 69, 0, 0.2);
-        }
-
-        .btn-confirm {
-            background: linear-gradient(135deg, #ff4500 0%, #b91c1c 100%);
-            animation: pulse-glow 2s infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 10px #b91c1c; }
-            50% { box-shadow: 0 0 25px #ff4500; transform: scale(1.02); }
-        }
-
-        .status-badge {
-            background: rgba(255, 69, 0, 0.1);
-            color: #ff4500;
-            border: 1px solid #ff4500;
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
+        body { background: #050000; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; min-height: screen; margin: 0; }
+        .magma { position: fixed; inset: 0; background: radial-gradient(circle at 50% 100%, #450a0a, #050000); z-index: -1; }
+        .card { background: rgba(20, 5, 5, 0.8); backdrop-filter: blur(15px); border: 1px solid #ff450033; padding: 40px; border-radius: 30px; width: 100%; max-width: 450px; text-align: center; }
+        .loader { font-size: 50px; animation: spin 2s linear infinite; display: none; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="magma-bg"></div>
+<body>
+    <div class="magma"></div>
 
-    <div class="checkout-card w-full max-w-lg rounded-[2.5rem] p-8 md:p-12">
-        <div class="text-center mb-10">
-            <h1 class="text-4xl font-black mb-2 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">تأكيد الطلب</h1>
-            <div class="flex justify-center mt-4">
-                <span class="status-badge tracking-widest uppercase">OXR SECURED GATEWAY</span>
-            </div>
+    <div class="card" id="box">
+        <h1 id="title" class="text-2xl font-black text-orange-500 mb-6">تأكيد الشراء</h1>
+        
+        <div id="info" class="bg-white/5 p-4 rounded-xl mb-6">
+            <p class="text-sm">المنتج: <span id="p-name" class="font-bold text-white">-</span></p>
+            <p class="text-sm">السعر: <span id="p-price" class="font-bold text-orange-500">-</span></p>
         </div>
 
-        <div class="bg-white/5 rounded-2xl p-6 mb-8 border border-white/10">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-slate-400 text-sm">الخدمة المختارة:</span>
-                <span id="product-name" class="font-bold text-xl text-white">جاري التحميل...</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-slate-400 text-sm">إجمالي المبلغ:</span>
-                <span id="product-price" class="font-black text-2xl text-orange-500">0 ريال</span>
-            </div>
+        <input type="text" id="r-user" class="w-full p-3 rounded-lg bg-white/10 border border-orange-500/30 mb-4 text-center font-bold text-orange-400" readonly>
+        
+        <p class="text-[10px] text-slate-500 mb-6">* بعد إتمام الشراء، سيصلك معلومات الحساب فوراً هنا.</p>
+
+        <button onclick="pay()" id="btn" class="w-full py-4 bg-gradient-to-r from-orange-600 to-red-700 rounded-xl font-bold shadow-lg shadow-red-900/40">إتمام الدفع</button>
+        
+        <div id="loading" class="mt-4">
+            <div class="loader" id="clock">⌛</div>
+            <p id="timer" class="hidden text-orange-500 font-bold mt-2">03:00</p>
         </div>
-
-        <form class="space-y-6">
-            <div>
-                <label class="block text-xs font-bold text-slate-400 mb-2 mr-2 uppercase">الاسم الكامل</label>
-                <input type="text" placeholder="أدخل اسمك الثلاثي" class="input-field w-full py-4 px-6 rounded-2xl" required>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-slate-400 mb-2 mr-2 uppercase">رقم الجوال (واتساب)</label>
-                <input type="tel" placeholder="05xxxxxxxx" class="input-field w-full py-4 px-6 rounded-2xl text-left" dir="ltr" required>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-slate-400 mb-2 mr-2 uppercase">اليوزر المستهدف (إن وجد)</label>
-                <input type="text" placeholder="@example" class="input-field w-full py-4 px-6 rounded-2xl text-left" dir="ltr">
-            </div>
-
-            <div class="pt-4 text-center">
-                <p class="text-[10px] text-slate-500 mb-6 px-4 leading-relaxed">بضغطك على تأكيد الطلب، سيتم توجيهك مباشرة لقسم الدفع النهائي لمعالجة طلبك فوراً.</p>
-                
-                <button type="submit" class="btn-confirm w-full py-5 rounded-2xl text-lg font-black text-white shadow-2xl transition-all">
-                    تأكيد وإتمام الدفع
-                </button>
-                
-                <a href="index.html" class="inline-block mt-6 text-slate-500 hover:text-white text-sm transition-all border-b border-transparent hover:border-white">
-                    ← العودة للمتجر
-                </a>
-            </div>
-        </form>
     </div>
 
     <script>
-        // سكربت ذكي لقراءة البيانات من الرابط (URL)
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const itemName = urlParams.get('item');
-            const itemPrice = urlParams.get('price');
+        // قراءة البيانات وتوليد يوزر
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('p-name').innerText = params.get('item') || 'منتج';
+        document.getElementById('p-price').innerText = (params.get('price') || '0') + ' ريال';
+        
+        const user = Math.random().toString(36).substring(2, 5); // يوزر عشوائي 3 رموز
+        document.getElementById('r-user').value = user;
 
-            if (itemName) {
-                document.getElementById('product-name').textContent = itemName;
-            }
-            if (itemPrice) {
-                document.getElementById('product-price').textContent = itemPrice + " ريال";
-            }
-        };
+        function pay() {
+            document.getElementById('title').innerText = "جاري المعالجة...";
+            document.getElementById('btn').style.display = 'none';
+            document.getElementById('clock').style.display = 'inline-block';
+            document.getElementById('timer').classList.remove('hidden');
+
+            let time = 180;
+            const run = setInterval(() => {
+                time--;
+                let m = Math.floor(time / 60);
+                let s = time % 60;
+                document.getElementById('timer').innerText = `0${m}:${s < 10 ? '0'+s : s}`;
+                
+                if(time <= 0) {
+                    clearInterval(run);
+                    document.getElementById('box').innerHTML = `
+                        <h1 class="text-3xl text-green-500 font-black">✅ تم الشراء</h1>
+                        <div class="bg-white/5 p-6 rounded-2xl mt-4 text-left font-mono">
+                            <p>User: <span class="text-green-400">${user}</span></p>
+                            <p>Pass: OXR_9982</p>
+                        </div>
+                        <button onclick="location.href='index.html'" class="mt-6 text-slate-500 underline text-sm">العودة</button>
+                    `;
+                }
+            }, 1000);
+        }
     </script>
 </body>
 </html>
