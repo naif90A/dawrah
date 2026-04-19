@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="متجر سعود الرسمي - الوجهة الأولى لخدمات فك الحظر، يوزرات التيك توك النادرة، ودورات الأمن السيبراني.">
-    <title>سعود | المتجر الرسمي المعتمد</title>
+    <title>OXR | المتجر الرسمي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -12,88 +11,51 @@
             background-color: #020617;
             color: white;
             scroll-behavior: smooth;
-            overflow-x: hidden;
         }
 
-        /* إضاءة خلفية خفيفة وهادئة */
         .ambient-glow {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% -20%, #1e293b 0%, #020617 80%);
+            background: radial-gradient(circle at 50% -20%, #450a0a 0%, #020617 80%);
             z-index: -1;
         }
 
-        /* الواجهة الأساسية */
-        .glow-logo {
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
-            animation: pulse-blue 4s infinite ease-in-out;
+        /* اسم المتجر المزخرف والملتهب */
+        .flame-text {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #ff0000;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4d4d, 0 0 40px #ff0000;
+            animation: flicker 1.5s infinite alternate;
+            letter-spacing: 5px;
         }
 
-        @keyframes pulse-blue {
-            0%, 100% { transform: scale(1); opacity: 0.9; box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); }
-            50% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 50px rgba(59, 130, 246, 0.6); }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4d4d, 0 0 40px #ff0000; }
+            50% { opacity: 0.8; text-shadow: 0 0 15px #ff0000, 0 0 30px #8b0000, 0 0 60px #ff0000; transform: scale(1.02); }
         }
 
-        /* شريط التعليقات (50 تعليق شعبي) */
+        /* شريط التعليقات */
         .ticker-container {
-            width: 100%;
-            overflow: hidden;
-            background: rgba(15, 23, 42, 0.95);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 12px 0;
-            white-space: nowrap;
-            backdrop-filter: blur(10px);
-            cursor: pointer;
+            width: 100%; overflow: hidden; background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid #450a0a; padding: 12px 0; white-space: nowrap;
         }
-        
-        .ticker-wrapper {
-            display: inline-block;
-            animation: ticker-scroll 120s linear infinite;
-        }
+        .ticker-wrapper { display: inline-block; animation: ticker-scroll 120s linear infinite; }
+        .comment-item { display: inline-block; margin-left: 50px; color: #94a3b8; font-size: 0.9rem; }
+        .comment-item span { color: #ef4444; font-weight: bold; }
 
-        /* إيقاف الشريط عند تمرير الماوس */
-        .ticker-container:hover .ticker-wrapper {
-            animation-play-state: paused;
-        }
+        @keyframes ticker-scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        .comment-item {
-            display: inline-block;
-            margin-left: 50px;
-            color: #94a3b8;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-        .comment-item:hover { color: #f8fafc; }
-        .comment-item span { color: #3b82f6; font-weight: bold; margin-left: 5px; }
-
-        @keyframes ticker-scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* بطاقات زجاجية محسنة */
+        /* البطاقات الزجاجية */
         .glass-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.7));
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s;
         }
-        .glass-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
-        }
+        .glass-card:hover { transform: translateY(-8px); border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); }
 
-        .btn-action {
-            background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
-            transition: all 0.3s ease;
-            color: white !important;
-        }
-        .btn-action:hover { 
-            filter: brightness(1.15);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-            transform: scale(1.02);
-        }
+        .btn-action { background: linear-gradient(90deg, #b91c1c 0%, #7f1d1d 100%); transition: 0.3s; }
+        .btn-action:hover { filter: brightness(1.2); box-shadow: 0 0 15px #ef4444; }
     </style>
 </head>
 <body>
@@ -101,136 +63,101 @@
 
     <div class="ticker-container">
         <div class="ticker-wrapper">
-            <div class="comment-item"><span>أبو فهد:</span> عز الله مقامك يا سعود، السناب رجع بثواني</div>
+            <div class="comment-item"><span>أبو فهد:</span> عز الله مقامك يا OXR، السناب رجع بثواني</div>
             <div class="comment-item"><span>مطلق العتيبي:</span> يوزر مطنوخ وراعي فزعات بيض الله وجهك</div>
             <div class="comment-item"><span>صالح:</span> الدورة تسوى وزنها ذهب يا عيال لا تفوتكم</div>
             <div class="comment-item"><span>نايف الشمري:</span> من جربت فك الحظر عنده ارتحت، ثقة</div>
-            <div class="comment-item"><span>حمد:</span> والله إنك كفو، يوزر ثلاثي زي اللوز</div>
-            <div class="comment-item"><span>سعد الدوسري:</span> أطلق متجر وربي، سرعة ومصداقية</div>
-            <div class="comment-item"><span>عزوز:</span> ياشيخ الله يرحم والديك، فكيت أزمة الحظر</div>
-            <div class="comment-item"><span>عبدالله:</span> الشرح في الدورة يبرد الكبد، وافي وكافي</div>
-            <div class="comment-item"><span>سلطان:</span> شريت يوزر ثنائي، قسماً بالله فخامة</div>
-            <div class="comment-item"><span>ابو ريان:</span> تعامل راقي وسرعة بالرد، الله يبارك لك</div>
-            <div class="comment-item"><span>ماجد:</span> للامانه افضل سعر بالسوق عند سعود</div>
-            <div class="comment-item"><span>فيصل:</span> كنت خايف بس طلع الرجال ثقة وثقة جداً</div>
-            <div class="comment-item"><span>مشاري:</span> تم استلام الحساب مع كامل معلوماته، شكراً</div>
-            <div class="comment-item"><span>بندر:</span> فك حظر الجهاز ضبط معي، انت بطل</div>
-            <div class="comment-item"><span>خالد الروقي:</span> الله يوفقك، الدورة غيرت مفاهيمي</div>
-            <div class="comment-item"><span>نواف:</span> يوزر تيك توك فخم، ما قصرت يا غالي</div>
-            <div class="comment-item"><span>تركي:</span> خدمة 5 نجوم وربي</div>
-            <div class="comment-item"><span>محمد:</span> السعر بطل والخدمة ابطل</div>
-            <div class="comment-item"><span>يوسف:</span> الدورة واضحة حتى للي ما يفهم بالتقنية</div>
-            <div class="comment-item"><span>فهد السهلي:</span> تم النقل بثواني، صادق وواضح</div>
-            <div class="comment-item"><span>سعود:</span> اشكرك على سعة صدرك وتعاملك الطيب</div>
-            <div class="comment-item"><span>ريان:</span> يوزر ثلاثي لقطة، الله يسعدك</div>
-            <div class="comment-item"><span>طلال:</span> ميزة سعود إنه يشرح لك كل شي بالتفصيل</div>
-            <div class="comment-item"><span>عمر:</span> السناب فك SS06 جهازي رجع حي</div>
-            <div class="comment-item"><span>بدر:</span> انصح الجميع بالتعامل مع سعود بدون تردد</div>
-            <div class="comment-item"><span>فارس:</span> دورة الهكر الاخلاقي عند سعود هي الصح</div>
-            <div class="comment-item"><span>سطام:</span> الله يبيض وجهك يالامير</div>
-            <div class="comment-item"><span>سلمان:</span> يوزرات نادرة وسعرها فيها</div>
-            <div class="comment-item"><span>راكان:</span> تسلم يمينك يا سعود، ما قصرت</div>
-            <div class="comment-item"><span>منصور:</span> افضل متجر خدمات رقمية بلا منازع</div>
-            <div class="comment-item"><span>أبو سارة:</span> الله يبارك لك في حلالك، شغل نظيف</div>
-            <div class="comment-item"><span>وليد:</span> يوزر ثنائي تيك توك فخمممم</div>
-            <div class="comment-item"><span>هاني:</span> دورة ممتازة ودعم فني مستمر</div>
-            <div class="comment-item"><span>ثامر:</span> تم فك حظر حسابي القديم، ممتن لك</div>
-            <div class="comment-item"><span>سامي:</span> فزعة ومرجلة، هذا سعود</div>
-            <div class="comment-item"><span>خالد:</span> تعاملت معه مرتين وكلها تمام</div>
-            <div class="comment-item"><span>جابر:</span> اشهد بالله انه ثقة</div>
-            <div class="comment-item"><span>علي:</span> جودة وسرعة، اهنيك</div>
-            <div class="comment-item"><span>مشعل:</span> السناب شغال الحين مية مية</div>
-            <div class="comment-item"><span>ابو محمد:</span> تستاهل كل خير يا سعود</div>
-            <div class="comment-item"><span>حمود:</span> شغل احترافي ورسمي</div>
-            <div class="comment-item"><span>فايز:</span> ما ندمت اني شريت من عندك</div>
-            <div class="comment-item"><span>مساعد:</span> انصح بالدورة للي يبي يتعلم صدق</div>
-            <div class="comment-item"><span>سلطان:</span> يوزر ثلاثي لقطة وربي</div>
+            <div class="comment-item"><span>سلطان:</span> شريت يوزر ثنائي من OXR، قسماً بالله فخامة</div>
         </div>
     </div>
 
     <div class="flex justify-center mt-8">
-        <div class="bg-slate-800/60 backdrop-blur-md px-5 py-2.5 rounded-full border border-slate-700/50 flex items-center gap-3 shadow-lg">
-            <div class="flex text-yellow-400 text-lg">
+        <div class="bg-slate-800/50 backdrop-blur px-6 py-3 rounded-full border border-red-900/30 flex items-center gap-4 shadow-xl">
+            <div class="flex text-red-500 text-lg order-2">
                 <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
             </div>
-            <span class="text-sm font-bold text-white">4.9/5</span>
-            <span class="text-xs text-slate-400 border-r border-slate-600/50 pr-3 mr-1">أكثر من 2,500 عميل راضٍ</span>
+            <div class="flex flex-col items-start order-1 border-l border-slate-700 pl-4">
+                <span class="text-xs text-slate-400">إجمالي المشترين</span>
+                <span id="buyer-count" class="text-xl font-black text-white">0</span>
+            </div>
         </div>
     </div>
 
-    <header class="pt-10 pb-16 px-4 text-center">
-        <div class="mb-8 flex justify-center">
-            <div class="w-32 h-32 bg-blue-600 rounded-full flex items-center justify-center glow-logo border-4 border-slate-900/50">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-            </div>
-        </div>
-
-        <h1 class="text-5xl md:text-7xl font-black mb-5 tracking-tight text-white drop-shadow-lg">
-            متجر <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">أ.سعود</span>
-        </h1>
-        <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-            الوجهة الأولى والأضمن لخدمات فك الحظر، اليوزرات النادرة، ودورات الحماية.
-        </p>
+    <header class="pt-16 pb-12 px-4 text-center">
+        <h1 class="flame-text mb-2">OXR</h1>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10">الوجهة الأقوى لخدمات فك الحظر واليوزرات النادرة.</p>
 
         <div class="flex flex-wrap justify-center gap-4">
-            <a href="#store" class="px-8 py-4 bg-slate-800/80 text-white font-bold rounded-full border border-slate-600 hover:bg-slate-700 hover:border-slate-500 transition-all shadow-lg">تصفح الخدمات</a>
-            <a href="#course" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-full shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 hover:-translate-y-1 transition-all">اشترك في الدورة الآن</a>
+            <a href="#store" class="px-10 py-4 bg-transparent text-white font-bold rounded-full border border-red-600 hover:bg-red-600/10 transition-all">دخول المتجر</a>
+            <a href="#" class="px-10 py-4 btn-action text-white font-bold rounded-full shadow-lg">اشتراك الدورة (800 ريال)</a>
         </div>
     </header>
 
-    <main id="store" class="max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <div class="glass-card p-6 rounded-3xl flex flex-col">
-            <div class="w-14 h-14 bg-yellow-500/20 text-yellow-400 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+    <section id="store" class="max-w-6xl mx-auto px-6 pb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center">
+            <div class="w-16 h-16 bg-red-600/20 text-red-500 rounded-2xl flex items-center justify-center mb-6">
                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
             </div>
-            <h3 class="text-xl font-bold mb-2 text-white">فك حظر سناب</h3>
-            <p class="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">فك الحظر الدائم وحظر الجهاز بشكل رسمي ومضمون 100%.</p>
-            <div class="text-2xl font-black text-blue-400 mb-5">150 ريال</div>
-            <a href="register.html?item=خدمة فك حظر سناب&price=150" class="btn-action block text-center py-3 rounded-xl font-bold text-sm">شراء فوري</a>
+            <h3 class="text-2xl font-bold mb-2">فك حظر سناب</h3>
+            <p class="text-slate-400 text-sm mb-6">فك حظر الجهاز والحساب بشكل رسمي.</p>
+            <div class="text-3xl font-black text-red-500 mb-6">150 ريال</div>
+            <a href="#" class="btn-action w-full py-3 rounded-xl font-bold">شراء الآن</a>
         </div>
 
-        <div class="glass-card p-6 rounded-3xl flex flex-col">
-            <div class="w-14 h-14 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-6 shadow-inner">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
-            </div>
-            <h3 class="text-xl font-bold mb-2 text-white">تيك توك ثلاثي</h3>
-            <p class="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">يوزرات مميزة وقصيرة جداً، تسلم مع الإيميل الأساسي.</p>
-            <div class="text-2xl font-black text-blue-400 mb-5">280 ريال</div>
-            <a href="register.html?item=يوزر تيك توك ثلاثي&price=280" class="btn-action block text-center py-3 rounded-xl font-bold text-sm">شراء فوري</a>
-        </div>
-
-        <div class="glass-card p-6 rounded-3xl flex flex-col border-blue-500/30 shadow-lg relative overflow-hidden">
-            <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10">VIP</div>
-            <div class="w-14 h-14 bg-blue-500/20 text-blue-400 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+        <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center border-red-500/20">
+            <div class="w-16 h-16 bg-red-600/20 text-red-500 rounded-2xl flex items-center justify-center mb-6">
                 <span class="font-black text-xl">2D</span>
             </div>
-            <h3 class="text-xl font-bold mb-2 text-white">تيك توك ثنائي</h3>
-            <p class="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">يوزرات نادرة جداً للمشاهير والباحثين عن التميز المطلق.</p>
-            <div class="text-2xl font-black text-white mb-5">350 ريال</div>
-            <a href="register.html?item=يوزر تيك توك ثنائي&price=350" class="btn-action block text-center py-3 rounded-xl font-bold text-sm">شراء فوري</a>
+            <h3 class="text-2xl font-bold mb-2">يوزر ثنائي</h3>
+            <p class="text-slate-400 text-sm mb-6">يوزرات VIP نادرة جداً ومميزة.</p>
+            <div class="text-3xl font-black text-white mb-6">350 ريال</div>
+            <a href="#" class="btn-action w-full py-3 rounded-xl font-bold">شراء الآن</a>
         </div>
 
-        <div id="course" class="glass-card p-6 rounded-3xl flex flex-col border-purple-500/30 shadow-lg relative overflow-hidden">
-            <div class="absolute top-0 right-0 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10">الأكثر مبيعاً</div>
-            <div class="w-14 h-14 bg-purple-500/20 text-purple-400 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                </svg>
+        <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center">
+            <div class="w-16 h-16 bg-red-600/20 text-red-500 rounded-2xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
             </div>
-            <h3 class="text-xl font-bold mb-2 text-white">دورة الاختراق الأخلاقي</h3>
-            <p class="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">تعلم الحماية والاختراق الأخلاقي من الصفر للاحتراف بشرح وافٍ.</p>
-            <div class="text-2xl font-black text-purple-400 mb-5">800 ريال</div>
-            <a href="register.html?item=دورة الاختراق الأخلاقي&price=800" class="bg-purple-600 hover:bg-purple-500 block text-center py-3 rounded-xl font-bold text-sm text-white transition-all shadow-lg shadow-purple-600/30">اشترك الآن</a>
+            <h3 class="text-2xl font-bold mb-2">دورة الحماية</h3>
+            <p class="text-slate-400 text-sm mb-6">تعلم أساسيات الأمن السيبراني والحماية.</p>
+            <div class="text-3xl font-black text-red-500 mb-6">800 ريال</div>
+            <a href="#" class="btn-action w-full py-3 rounded-xl font-bold">اشترك الآن</a>
         </div>
+    </section>
 
-    </main>
+    <script>
+        function animateCounter(id, start, end, duration) {
+            let obj = document.getElementById(id);
+            let range = end - start;
+            let minTimer = 50;
+            let stepTime = Math.abs(Math.floor(duration / range));
+            stepTime = Math.max(stepTime, minTimer);
+            let startTime = new Date().getTime();
+            let endTime = startTime + duration;
+            let timer;
 
-    <footer class="py-10 text-center text-slate-500 text-sm border-t border-slate-800/50 mt-10">
-        <p>© 2026 جميع الحقوق محفوظة لمتجر سعود</p>
+            function run() {
+                let now = new Date().getTime();
+                let remaining = Math.max((endTime - now) / duration, 0);
+                let value = Math.round(end - (remaining * range));
+                obj.innerHTML = value.toLocaleString();
+                if (value == end) {
+                    clearInterval(timer);
+                }
+            }
+
+            timer = setInterval(run, stepTime);
+            run();
+        }
+
+        // تشغيل العداد عند تحميل الصفحة من 0 إلى 334
+        window.onload = function() {
+            animateCounter("buyer-count", 0, 334, 2500);
+        };
+    </script>
+
+    <footer class="py-8 text-center text-slate-600 text-xs border-t border-slate-900">
+        <p>© 2026 جميع الحقوق محفوظة لمتجر OXR</p>
     </footer>
-
 </body>
 </html>
