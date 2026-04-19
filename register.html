@@ -3,147 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تأكيد الطلب | منصة أوهام</title>
+    <title>تأكيد الاشتراك | منصة أوهام</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
         
         body { 
-            background: #f8fafc; 
             font-family: 'Cairo', sans-serif; 
-            color: #0f172a;
+            background-color: #020617; 
+            color: white; 
             display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0;
+            overflow-x: hidden;
         }
 
-        .danish-card {
-            background: white;
-            padding: 50px;
-            border-radius: 40px;
-            width: 100%;
-            max-width: 550px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .ambient-bg { 
+            position: fixed; inset: 0; 
+            background: radial-gradient(circle at 50% 100%, #1e293b 0%, #020617 80%); 
+            z-index: -1; 
         }
 
-        .input-field {
-            background: #f1f5f9;
-            border: 2px solid transparent;
+        .electric-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 40px;
+            border-radius: 30px;
             width: 100%;
-            padding: 16px;
-            border-radius: 18px;
-            margin-bottom: 20px;
-            outline: none;
-            transition: 0.3s;
+            max-width: 500px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            position: relative;
         }
-        .input-field:focus { border-color: #3b82f6; background: white; }
 
-        .btn-confirm {
-            background: #0f172a;
-            color: white;
-            width: 100%;
-            padding: 20px;
+        /* تأثير الالتماس الكهربائي للنصوص */
+        .electric-text {
+            color: #fff;
+            text-shadow: 0 0 10px #3b82f6;
+            animation: glitch 2s infinite;
+        }
+        @keyframes glitch {
+            0%, 100% { opacity: 1; }
+            95% { opacity: 1; text-shadow: 0 0 10px #3b82f6; }
+            96% { opacity: 0.7; text-shadow: none; }
+            97% { opacity: 1; text-shadow: 0 0 20px #ff0000; }
+            98% { opacity: 0.8; }
+        }
+
+        .input-group label { display: block; font-size: 12px; color: #94a3b8; margin-bottom: 8px; margin-right: 5px; }
+        
+        .input-style {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white; width: 100%; padding: 14px; border-radius: 15px; margin-bottom: 20px;
+            outline: none; transition: 0.3s;
+        }
+        .input-style:focus { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
+
+        /* سداد المضيء والقابل للنسخ */
+        .sadad-container {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(30, 58, 138, 0.4));
+            border: 2px dashed #3b82f6;
             border-radius: 20px;
-            font-weight: 900;
-            font-size: 1.2rem;
-            transition: 0.4s;
+            padding: 20px;
+            margin-bottom: 25px;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.1);
+            transition: 0.3s;
+            position: relative;
         }
-        .btn-confirm:hover { transform: translateY(-3px); background: #1e293b; }
+        .sadad-container:hover { background: rgba(59, 130, 246, 0.2); transform: scale(1.02); }
+        .sadad-number { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; color: #60a5fa; }
 
-        .sadad-badge {
-            background: #eff6ff;
-            color: #1e40af;
-            padding: 15px;
-            border-radius: 15px;
-            font-weight: 900;
-            text-align: center;
-            border: 1px solid #dbeafe;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+        /* زر إرفاق الملف */
+        .file-upload {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px; border-radius: 15px; text-align: center;
+            cursor: pointer; margin-bottom: 25px; transition: 0.3s;
         }
+        .file-upload:hover { background: rgba(255, 255, 255, 0.05); border-color: #94a3b8; }
+
+        .btn-buy {
+            background: #3b82f6;
+            color: white; width: 100%; padding: 18px; border-radius: 18px;
+            font-weight: 900; font-size: 1.2rem; transition: 0.4s;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+        .btn-buy:hover { transform: translateY(-3px); box-shadow: 0 0 30px #3b82f6; }
 
         .hidden { display: none; }
-        
-        /* حركة ظهور أيقونة النجاح */
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: #22c55e;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 40px;
-            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
-            animation: scaleIn 0.5s ease;
-        }
-
-        @keyframes scaleIn {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
     </style>
 </head>
 <body>
+    <div class="ambient-bg"></div>
 
-    <div id="main-content" class="danish-card text-center">
-        <h2 class="text-3xl font-black mb-2">إتمام الاشتراك</h2>
-        <p class="text-slate-500 mb-8">الرجاء تزويدنا بالبيانات التالية لتثبيت طلبك</p>
-
-        <div class="text-right">
-            <label class="text-xs font-bold text-slate-400 mr-2">الاسم الكامل</label>
-            <input type="text" class="input-field" placeholder="أدخل اسمك الثلاثي">
-            
-            <label class="text-xs font-bold text-slate-400 mr-2">رقم حساب سداد المخصص</label>
-            <div class="sadad-badge">82492135384</div>
-
-            <label class="text-xs font-bold text-slate-400 mr-2">رقم الجوال (ليتم التواصل معك)</label>
-            <input type="tel" class="input-field" placeholder="05xxxxxxxx" dir="ltr">
-        </div>
-
-        <button onclick="submitOrder()" class="btn-confirm">تأكيد عملية الشراء</button>
-        <p class="text-[10px] text-slate-400 mt-4 italic">سيتم معالجة طلبك بشكل فوري بمجرد الضغط على التأكيد</p>
-    </div>
-
-    <div id="success-box" class="danish-card hidden text-center">
-        <div class="success-icon">✓</div>
+    <div id="payment-card" class="electric-card">
+        <h2 class="text-2xl font-black text-center mb-6 electric-text">تأكيد عملية الشراء</h2>
         
-        <h2 class="text-3xl font-black text-slate-900 mb-4">تم تأكيد طلبك بنجاح!</h2>
-        
-        <div class="space-y-4 mb-8 text-slate-600 leading-relaxed">
-            <p class="text-lg">شكراً لثقتكم بـ <span class="text-blue-600 font-bold">منصة أوهام</span>.</p>
-            <p>لقد استلمنا بياناتك بنجاح، ويقوم الفريق الفني حالياً بمراجعة عملية السداد لتفعيل حسابك.</p>
-            <div class="bg-blue-50 border-r-4 border-blue-500 p-4 text-right rounded-lg">
-                <p class="text-sm font-bold text-blue-900">ملاحظة هامة:</p>
-                <p class="text-sm text-blue-800">سوف نتواصل معك مباشرة عبر <span class="font-bold">الواتساب</span> خلال الدقائق القادمة لإرسال بيانات الدخول والبدء في الدورة.</p>
+        <div class="input-group text-right">
+            <label>الاسم الكامل</label>
+            <input type="text" class="input-style" placeholder="أدخل اسمك هنا">
+
+            <label>رقم الجوال</label>
+            <input type="tel" class="input-style text-left" placeholder="05xxxxxxxx" dir="ltr">
+
+            <label>رقم حساب سداد (اضغط للنسخ)</label>
+            <div class="sadad-container text-center" onclick="copySadad()">
+                <span class="text-[10px] block text-blue-300 mb-1 uppercase tracking-widest">SADAD ACCOUNT</span>
+                <span id="sadad-num" class="sadad-number">82492135384</span>
+                <div id="copy-msg" class="text-[9px] text-green-400 mt-2 opacity-0 transition-all">تم النسخ بنجاح!</div>
+            </div>
+
+            <label>إرفاق صورة التحويل (إيصال السداد)</label>
+            <div class="file-upload" onclick="document.getElementById('file-input').click()">
+                <span class="text-sm text-slate-400" id="file-name">اضغط هنا لإرفاق الملف 📎</span>
+                <input type="file" id="file-input" class="hidden" onchange="updateFileName(this)">
             </div>
         </div>
 
-        <div class="pt-6 border-t border-slate-100">
-            <p class="text-xs text-slate-400 mb-6 uppercase tracking-widest">رقم المرجع للطلب: <span id="ref-id" class="font-mono text-slate-900 font-bold"></span></p>
-            <button onclick="location.href='index.html'" class="text-blue-600 font-bold hover:underline transition-all">
-                العودة للمنصة الرئيسية
-            </button>
+        <button onclick="processOrder()" class="btn-buy">تأكيد الشراء الآن</button>
+    </div>
+
+    <div id="success-card" class="electric-card hidden text-center">
+        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(34,197,94,0.4)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+            </svg>
         </div>
+        <h2 class="text-3xl font-black mb-4 electric-text">تم تأكيد الطلب!</h2>
+        <div class="text-slate-300 space-y-4 text-sm leading-relaxed mb-8">
+            <p>شكراً لثقتكم بـ <span class="text-blue-400 font-bold">منصة أوهام</span>.</p>
+            <p>تم استلام بياناتك وإيصال التحويل بنجاح. سيقوم القسم التقني بمراجعة الطلب وتفعيل حسابك فوراً.</p>
+            <p class="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20 text-blue-300">
+                سيصلك رد عبر <span class="font-bold">الواتساب</span> خلال دقائق قليلة.
+            </p>
+        </div>
+        <button onclick="location.href='index.html'" class="text-xs text-slate-500 underline hover:text-white transition-all">العودة للمنصة الرئيسية</button>
     </div>
 
     <script>
-        // توليد رقم مرجعي للطلب
-        const ref = "OHM-" + Math.floor(100000 + Math.random() * 900000);
-        document.getElementById('ref-id').innerText = ref;
+        // دالة النسخ
+        function copySadad() {
+            const num = document.getElementById('sadad-num').innerText;
+            navigator.clipboard.writeText(num);
+            const msg = document.getElementById('copy-msg');
+            msg.style.opacity = '1';
+            setTimeout(() => msg.style.opacity = '0', 2000);
+        }
 
-        function submitOrder() {
-            // انتقال فوري واحترافي
-            const main = document.getElementById('main-content');
-            const success = document.getElementById('success-box');
+        // تحديث اسم الملف عند الرفع
+        function updateFileName(input) {
+            const name = input.files[0] ? input.files[0].name : "اضغط هنا لإرفاق الملف 📎";
+            document.getElementById('file-name').innerText = name;
+            document.getElementById('file-name').classList.add('text-blue-400');
+        }
+
+        // معالجة الطلب
+        function processOrder() {
+            document.getElementById('payment-card').classList.add('hidden');
+            document.getElementById('success-card').classList.remove('hidden');
             
-            main.classList.add('hidden');
-            success.classList.remove('hidden');
+            // تأثير نبض خفيف عند النجاح
+            document.body.style.backgroundColor = "#064e3b";
+            setTimeout(() => {
+                document.body.style.backgroundColor = "#020617";
+            }, 500);
         }
     </script>
 </body>
