@@ -3,107 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة أوهام | الاختراق الأخلاقي</title>
+    <title>منصة أوهام | OHM Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-        body { font-family: 'Cairo', sans-serif; background-color: #020617; color: white; overflow-x: hidden; }
+        
+        /* تثبيت الخلفية لمنع اللون الأصفر نهائياً */
+        html, body {
+            background-color: #020617 !important;
+            margin: 0;
+            padding: 0;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+        }
 
-        /* تأثير الالتماس الكهربائي للشعار */
-        .electric-glow {
+        /* خلفية شعاعية كهربائية */
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #020617 100%);
+            z-index: -1;
+        }
+
+        /* العدادات العلوية */
+        .top-stats {
+            position: absolute;
+            top: 25px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 50;
+        }
+
+        .stat-pill {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+        }
+
+        /* شعار أوهام - التماس كهربائي شعاعي */
+        .brand-ohm {
+            font-size: clamp(4rem, 15vw, 8.5rem);
+            font-weight: 900;
             color: #fff;
-            text-shadow: 0 0 5px #fff, 0 0 10px #3b82f6, 0 0 20px #3b82f6;
-            animation: glitch 1s linear infinite;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            animation: electric-hit 3s infinite;
         }
 
-        @keyframes glitch {
-            0%, 100% { text-shadow: 0 0 10px #3b82f6, 0 0 20px #3b82f6; opacity: 1; }
-            50% { text-shadow: none; opacity: 0.8; }
-            52% { text-shadow: 0 0 40px #ff0000, 2px 2px #3b82f6; opacity: 1; }
-            54% { text-shadow: 0 0 10px #3b82f6; }
+        .brand-ohm span {
+            color: #3b82f6;
+            filter: drop-shadow(0 0 10px #3b82f6);
         }
 
-        /* شريط تعليقات (Loop لا نهائي) */
-        .ticker-container { width: 100%; overflow: hidden; background: rgba(15, 23, 42, 0.9); padding: 15px 0; display: flex; }
-        .ticker-wrapper { display: flex; white-space: nowrap; animation: ticker-loop 40s linear infinite; }
-        .comment-item { flex-shrink: 0; padding: 0 40px; color: #94a3b8; font-size: 0.95rem; }
-        .comment-item span { color: #3b82f6; font-weight: bold; }
+        @keyframes electric-hit {
+            0%, 90%, 100% { transform: scale(1); filter: brightness(1); }
+            92% { transform: scale(1.02) skewX(2deg); filter: brightness(2); text-shadow: 0 0 40px #3b82f6; }
+            94% { transform: scale(0.98) skewX(-2deg); filter: brightness(1.5); }
+            96% { opacity: 0.5; }
+            98% { opacity: 1; }
+        }
+
+        /* زر النيون */
+        .btn-neon {
+            background: transparent;
+            border: 2px solid #3b82f6;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 15px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-neon:hover {
+            background: #3b82f6;
+            box-shadow: 0 0 40px #3b82f6;
+            transform: translateY(-3px);
+        }
+
+        /* شريط التعليقات اللانهائي */
+        .ticker-wrap {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            overflow: hidden;
+        }
+        .ticker-move {
+            display: flex;
+            width: max-content;
+            animation: ticker-loop 30s linear infinite;
+        }
+        .comment {
+            padding: 0 40px;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
+        .comment b { color: #3b82f6; margin-left: 5px; }
 
         @keyframes ticker-loop {
             0% { transform: translateX(0); }
-            100% { transform: translateX(100%); }
-        }
-
-        .ambient-glow {
-            position: fixed; inset: 0;
-            background: radial-gradient(circle at 50% -20%, #1e293b 0%, #020617 80%);
-            z-index: -1;
+            100% { transform: translateX(50%); }
         }
     </style>
 </head>
 <body>
-    <div class="ambient-glow"></div>
+    <div class="bg-glow"></div>
 
-    <div class="ticker-container">
-        <div class="ticker-wrapper">
-            <div class="comment-item"><span>صالح:</span> الدورة تسوى وزنها ذهب</div>
-            <div class="comment-item"><span>خالد الروقي:</span> الشرح غير مفاهيمي بالكامل</div>
-            <div class="comment-item"><span>عبدالله:</span> الشرح يبرد الكبد، وافي</div>
-            <div class="comment-item"><span>فهد:</span> المصداقية عند أوهام توب</div>
-            <div class="comment-item"><span>نايف:</span> أطلق استثمار سويته بـ 2026</div>
-            <div class="comment-item"><span>صالح:</span> الدورة تسوى وزنها ذهب</div>
-            <div class="comment-item"><span>خالد الروقي:</span> الشرح غير مفاهيمي بالكامل</div>
-            <div class="comment-item"><span>عبدالله:</span> الشرح يبرد الكبد، وافي</div>
+    <div class="top-stats">
+        <div class="stat-pill">
+            <span class="text-blue-400 font-black text-xl" id="student-count">0</span>
+            <span class="text-[10px] text-slate-400 uppercase">طالب</span>
+        </div>
+        <div class="stat-pill">
+            <span class="text-yellow-400 font-black text-xl">4.9</span>
+            <span class="text-[10px] text-slate-400 uppercase">التقييم</span>
         </div>
     </div>
 
-    <header class="pt-24 pb-24 px-4 text-center">
-        <div class="mb-8 flex justify-center">
-            <div class="w-32 h-32 bg-blue-600 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(59,130,246,0.6)] animate-pulse border-4 border-slate-900">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-            </div>
+    <header class="min-h-screen flex flex-col items-center justify-center text-center px-4">
+        <div class="relative">
+            <div class="absolute inset-0 bg-blue-600 blur-[100px] opacity-10 animate-pulse"></div>
+            <h1 class="brand-ohm">أوهـ<span>ام</span></h1>
         </div>
-
-        <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tight electric-glow">
-            منصة <span class="text-blue-500">أوهام</span>
-        </h1>
         
-        <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-12">
-            بوابتك لاحتراف الحماية والأمن السيبراني. محتوى حيوي، متجدد، وقوي.
+        <p class="text-slate-400 mt-4 text-lg max-w-lg leading-relaxed font-light">
+            احتراف الحماية والأمن السيبراني بأسلوب <span class="text-white font-bold">كهربائي</span> متطور.
         </p>
 
-        <a href="register.html?item=دورة الاختراق الأخلاقي&price=800" 
-           class="px-12 py-5 bg-blue-600 text-white font-black rounded-2xl text-2xl shadow-2xl hover:bg-blue-500 transition-all inline-block">
-            اشترك الآن (800 ريال)
-        </a>
+        <div class="mt-10">
+            <a href="register.html?item=دورة الاختراق الأخلاقي&price=800" class="btn-neon">
+                ابدأ رحلتك الآن
+            </a>
+        </div>
+
+        <div class="ticker-wrap">
+            <div class="ticker-move">
+                <div class="comment"><b>صالح:</b> الدورة تسوى وزنها ذهب</div>
+                <div class="comment"><b>أبو فهد:</b> عز الله مقامك يا سعود</div>
+                <div class="comment"><b>خالد:</b> الشرح يبرد الكبد، وافي</div>
+                <div class="comment"><b>يوسف:</b> المصداقية توب</div>
+                <div class="comment"><b>صالح:</b> الدورة تسوى وزنها ذهب</div>
+                <div class="comment"><b>أبو فهد:</b> عز الله مقامك يا سعود</div>
+                <div class="comment"><b>خالد:</b> الشرح يبرد الكبد، وافي</div>
+            </div>
+        </div>
     </header>
 
-    <div class="max-w-4xl mx-auto px-6 mb-20 grid grid-cols-2 gap-4">
-        <div class="bg-slate-800/40 p-6 rounded-3xl border border-slate-700 text-center">
-            <p class="text-4xl font-black text-blue-500" id="subscriber-count">0</p>
-            <p class="text-xs text-slate-400 mt-2 uppercase">طالب ملتحق</p>
-        </div>
-        <div class="bg-slate-800/40 p-6 rounded-3xl border border-slate-700 text-center">
-            <p class="text-4xl font-black text-yellow-500">4.9</p>
-            <p class="text-xs text-slate-400 mt-2 uppercase">تقييم المنصة</p>
-        </div>
-    </div>
-
     <script>
-        function animateValue(id, start, end, duration) {
+        // عداد الطلاب
+        function startCounter(id, start, end, duration) {
             let obj = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start);
-                if (progress < 1) window.requestAnimationFrame(step);
-            };
-            window.requestAnimationFrame(step);
+            let current = start;
+            let range = end - start;
+            let step = Math.abs(Math.floor(duration / range));
+            let timer = setInterval(() => {
+                current += 13; 
+                if (current >= end) {
+                    obj.textContent = end.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    obj.textContent = current.toLocaleString();
+                }
+            }, 10);
         }
-        window.onload = () => animateValue("subscriber-count", 0, 2676, 2000);
+
+        window.onload = () => {
+            startCounter("student-count", 0, 2676, 2000);
+        };
     </script>
 </body>
 </html>
