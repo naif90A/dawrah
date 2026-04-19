@@ -3,193 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أ. سعود | OXR Official Store</title>
+    <title>أ. سعود | OXR Official</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
         
         body { 
             font-family: 'Cairo', sans-serif; 
-            background: #020617; 
+            background-color: #020617; /* لون كحلي غامق جداً لمنع اللون الأصفر */
             color: white; 
             margin: 0; 
+            padding: 0;
             overflow-x: hidden; 
         }
 
-        /* خلفية حيوية عميقة */
-        .ambient { 
+        /* خلفية بركانية احترافية */
+        .ambient-bg { 
             position: fixed; 
             inset: 0; 
-            background: radial-gradient(circle at 50% -20%, #450a0a 0%, #020617 85%); 
+            background: radial-gradient(circle at 50% -20%, #450a0a 0%, #020617 80%); 
             z-index: -1; 
         }
 
-        /* شعار أ. سعود الرسمي */
-        .brand-name { 
-            font-size: clamp(3.5rem, 12vw, 7.5rem); 
+        /* شعار أ. سعود */
+        .brand-logo { 
+            font-size: clamp(3rem, 10vw, 6rem); 
             font-weight: 900; 
             color: #ffffff;
-            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-            letter-spacing: -2px;
-            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+            line-height: 1;
         }
-        .brand-name span { color: #ff0000; animation: glow-text 2s infinite alternate; }
+        .brand-logo span { color: #ff0000; }
 
-        @keyframes glow-text {
-            from { text-shadow: 0 0 10px #ff0000; }
-            to { text-shadow: 0 0 30px #ff4500, 0 0 50px #ff0000; }
-        }
-
-        /* شريط المعلومات العلوي */
-        .top-info { 
-            position: absolute; 
-            top: 20px; 
-            width: 100%; 
-            padding: 0 30px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            z-index: 50; 
-        }
-        .stat-badge { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 8px 18px; 
-            border-radius: 15px; 
-        }
-
-        /* الأزرار الحيوية تحت الشعار */
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 30px;
-        }
-        .btn-main {
-            padding: 14px 35px;
+        /* الأزرار الحيوية */
+        .btn-action {
+            padding: 12px 32px;
             border-radius: 12px;
             font-weight: 700;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
+            gap: 8px;
         }
-        .btn-store {
-            background: #ffffff;
-            color: #000;
-        }
-        .btn-course {
-            background: #ff0000;
-            color: #fff;
-            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3);
-        }
-        .btn-main:hover {
-            transform: translateY(-5px) scale(1.05);
-            filter: brightness(1.1);
-        }
+        .btn-white { background: #ffffff; color: #000; }
+        .btn-red { background: #ff0000; color: #fff; box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); }
+        .btn-action:hover { transform: translateY(-3px); opacity: 0.9; }
 
-        /* البطاقات الرسمية للمنتجات */
-        .product-card { 
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6));
-            backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: 0.4s; 
-            padding: 2.5rem; 
-            border-radius: 2rem;
+        /* كروت المنتجات */
+        .p-card { 
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 2rem; 
+            border-radius: 1.5rem;
             text-align: center;
+            transition: 0.3s;
         }
-        .product-card:hover { 
-            border-color: #ff4500; 
-            box-shadow: 0 0 40px rgba(255, 69, 0, 0.15); 
-        }
+        .p-card:hover { border-color: #ff0000; transform: scale(1.02); }
 
-        .price-tag {
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(to right, #fff, #ff4500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* شريط المعلومات */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            position: absolute;
+            top: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <div class="ambient"></div>
+    <div class="ambient-bg"></div>
 
-    <div class="top-info">
-        <div class="stat-badge">
-            <span class="text-[10px] text-slate-400 block uppercase">النشاط المباشر</span>
-            <span id="live-visitors" class="text-white font-bold text-lg">0</span>
-            <span class="text-orange-500 animate-pulse">🔥</span>
+    <div class="top-nav">
+        <div class="bg-black/50 px-4 py-2 rounded-xl border border-white/10">
+            <span class="text-xs text-slate-400 block">الزوار</span>
+            <span id="counter" class="text-xl font-black text-white">0</span> <span class="text-red-500">🔥</span>
         </div>
-        <div class="stat-badge text-left">
-            <div class="text-yellow-500 text-xs">★ ★ ★ ★ ★</div>
-            <span class="text-[10px] text-slate-400">نظام موثق معتمد</span>
+        <div class="text-left bg-black/50 px-4 py-2 rounded-xl border border-white/10">
+            <div class="text-yellow-500 text-xs">★★★★★</div>
+            <span class="text-[10px] text-slate-400 uppercase tracking-tighter">Verified Store</span>
         </div>
     </div>
 
-    <header class="text-center pt-36 pb-20 px-4">
-        <h1 class="brand-name">أ. <span>سعود</span></h1>
-        <p class="text-slate-400 text-sm tracking-[0.3em] font-light">EXCELLENCE & TECHNOLOGY</p>
+    <header class="text-center pt-40 pb-16 px-4">
+        <h1 class="brand-logo">أ. <span>سعود</span></h1>
+        <p class="text-slate-500 mt-2 text-sm tracking-widest uppercase">Expert Technical Services</p>
         
-        <div class="nav-buttons">
-            <a href="#store" class="btn-main btn-store">
-                <span>🛍️</span> المتجر
+        <div class="flex justify-center gap-4 mt-10">
+            <a href="#store" class="btn-action btn-white">
+                المتجر
             </a>
-            <a href="register.html?item=دورة التميز التقنية&price=800" class="btn-main btn-course">
-                <span>⚡</span> اشتراك بالدورة
+            <a href="register.html?item=اشتراك الدورة&price=800" class="btn-action btn-red">
+                اشتراك الدورة
             </a>
         </div>
     </header>
 
     <main id="store" class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-32">
-        
-        <div class="product-card">
+        <div class="p-card">
             <div class="text-4xl mb-4">🎵</div>
-            <h3 class="text-xl font-bold mb-2">تيك توك ثنائي</h3>
-            <p class="text-slate-500 text-sm mb-6">يوزرات نادرة وحصرية لمتجر أ. سعود</p>
-            <div class="price-tag mb-6">350 ريال</div>
-            <a href="register.html?item=تيك توك ثنائي&price=350" class="block w-full py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all font-bold">حجز اليوزر</a>
+            <h2 class="text-xl font-bold">تيك توك ثنائي</h2>
+            <div class="text-2xl font-black text-red-500 my-4">350 ريال</div>
+            <a href="register.html?item=تيك توك ثنائي&price=350" class="block w-full py-3 bg-white/5 rounded-xl border border-white/10 font-bold hover:bg-red-600 transition-all">طلب الخدمة</a>
         </div>
 
-        <div class="product-card">
+        <div class="p-card">
             <div class="text-4xl mb-4">📸</div>
-            <h3 class="text-xl font-bold mb-2">إنستقرام ثنائي</h3>
-            <p class="text-slate-500 text-sm mb-6">يوزرات ملكية مع الضمان الذهبي</p>
-            <div class="price-tag mb-6">390 ريال</div>
-            <a href="register.html?item=إنستقرام ثنائي&price=390" class="block w-full py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all font-bold">حجز اليوزر</a>
+            <h2 class="text-xl font-bold">إنستقرام ثنائي</h2>
+            <div class="text-2xl font-black text-red-500 my-4">390 ريال</div>
+            <a href="register.html?item=إنستقرام ثنائي&price=390" class="block w-full py-3 bg-white/5 rounded-xl border border-white/10 font-bold hover:bg-red-600 transition-all">طلب الخدمة</a>
         </div>
 
-        <div class="product-card">
+        <div class="p-card">
             <div class="text-4xl mb-4">👻</div>
-            <h3 class="text-xl font-bold mb-2">فك حظر سناب</h3>
-            <p class="text-slate-500 text-sm mb-6">فك حظر الجهاز والحساب بشكل رسمي</p>
-            <div class="price-tag mb-6">150 ريال</div>
-            <a href="register.html?item=فك حظر سناب&price=150" class="block w-full py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all font-bold">اطلب الآن</a>
+            <h2 class="text-xl font-bold">فك حظر سناب</h2>
+            <div class="text-2xl font-black text-red-500 my-4">150 ريال</div>
+            <a href="register.html?item=فك حظر سناب&price=150" class="block w-full py-3 bg-white/5 rounded-xl border border-white/10 font-bold hover:bg-red-600 transition-all">طلب الخدمة</a>
         </div>
-
     </main>
 
     <script>
-        // عداد الزوار التفاعلي
-        function animateValue(id, start, end, duration) {
-            let obj = document.getElementById(id);
-            let current = start;
-            let range = end - start;
-            let increment = end > start ? 1 : -1;
-            let stepTime = Math.abs(Math.floor(duration / range));
-            let timer = setInterval(function() {
-                current += increment;
-                obj.innerHTML = current;
-                if (current == end) clearInterval(timer);
-            }, stepTime);
-        }
-        window.onload = () => animateValue("live-visitors", 0, 237, 2000);
+        // عداد زوار بسيط ومضمون
+        let count = 0;
+        const target = 237;
+        const speed = 10; 
+        const timer = setInterval(() => {
+            count++;
+            document.getElementById('counter').innerText = count;
+            if (count >= target) clearInterval(timer);
+        }, speed);
     </script>
-
-    <footer class="py-10 text-center opacity-40 text-xs">
-        <p>© 2026 جميع الحقوق محفوظة لمنصة أ. سعود الرسمية</p>
-    </footer>
 </body>
 </html>
