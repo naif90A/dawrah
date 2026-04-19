@@ -3,70 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سعود | دورة الاختراق الأخلاقي</title>
+    <title>دورة المدرب سعود | الاختراق الأخلاقي والاحتراف التقني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #020617;
             color: white;
             scroll-behavior: smooth;
             overflow-x: hidden;
         }
 
-        .ambient-glow {
+        /* حاوية الخلفية المتحركة */
+        #bg-canvas {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% -20%, #1e293b 0%, #020617 80%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* تحت كل شيء */
+            opacity: 0.3; /* شفافية لكي لا تشوش على النص */
+        }
+
+        /* طبقة تدريج لوني فوق الخلفية لضمان وضوح النص */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(2,6,23,0.8) 0%, rgba(2,6,23,0.95) 100%);
             z-index: -1;
         }
 
-        .glow-logo {
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
-            animation: pulse-blue 4s infinite ease-in-out;
+        /* تصميم مطور لشعار سعود مع تأثير نبض */
+        .saud-avatar-pulse {
+            position: relative;
+            border-radius: 50%;
+        }
+        .saud-avatar-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.5);
+            animation: pulse-ring 2s infinite;
+            z-index: -1;
         }
 
-        @keyframes pulse-blue {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.05); opacity: 1; }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.3); opacity: 0; }
         }
 
-        /* شريط التعليقات بدون أرقام */
+        /* شريط التعليقات الاحترافي */
         .ticker-container {
             width: 100%;
             overflow: hidden;
-            background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid #1e293b;
-            padding: 12px 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 14px 0;
             white-space: nowrap;
+            position: relative;
+            z-index: 10;
         }
         .ticker-wrapper {
             display: inline-block;
-            animation: ticker-scroll 150s linear infinite;
+            animation: ticker-scroll 120s linear infinite;
         }
         .comment-item {
             display: inline-block;
-            margin-left: 60px;
-            color: #94a3b8;
-            font-size: 0.95rem;
+            margin-left: 50px;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.05);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.03);
         }
-        .comment-item span { color: #3b82f6; font-weight: bold; margin-left: 8px; }
+        .comment-item span { color: #60a5fa; font-weight: 700; margin-left: 8px; }
 
         @keyframes ticker-scroll {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
 
-        .whatsapp-note {
-            color: #64748b;
-            font-size: 0.85rem;
-            margin-top: 10px;
-            display: block;
+        /* نمط الزر الأساسي المطور */
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease;
         }
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+            transform: translateY(-2px);
+        }
+
     </style>
 </head>
 <body>
-    <div class="ambient-glow"></div>
+    <canvas id="bg-canvas"></canvas>
+    <div class="overlay"></div>
 
     <div class="ticker-container">
         <div class="ticker-wrapper">
@@ -86,121 +132,107 @@
             <div class="comment-item"><span>بندر:</span> والله اني استفدت فايدة ما توقعتها</div>
             <div class="comment-item"><span>نايف الشمري:</span> من جربت الدورة ارتحت، شغل مرتب</div>
             <div class="comment-item"><span>سلطان:</span> أفضل محتوى تقني مر علي للأمانة</div>
+            <div class="comment-item"><span>حمد:</span> سعود راعي فزعات وشرحه يوصل بسرعة</div>
+            <div class="comment-item"><span>سعد الدوسري:</span> أطلق دورة وربي، سرعة وإتقان</div>
+            <div class="comment-item"><span>عزوز:</span> ياشيخ الله يرحم والديك على هالمعلومات</div>
             <div class="comment-item"><span>بدر:</span> انصح الجميع بالاشتراك بدون تردد</div>
+            <div class="comment-item"><span>سطام:</span> الله يبيض وجهك يالامير على الشغل النظيف</div>
+            <div class="comment-item"><span>سلمان:</span> الدورة متعوب عليها وتستاهل كل ريال</div>
             <div class="comment-item"><span>راكان:</span> تسلم يمينك يا سعود، ما قصرت معنا</div>
-            <div class="comment-item"><span>نواف:</span> ختامها مسك، أطلق دورة مع أطلق مدرب</div><div class="ticker-container">
-            <div class="comment-item"><span>1. أبو فهد:</span> عز الله مقامك يا سعود، الدورة ذي كنز</div>
-            <div class="comment-item"><span>2. صالح:</span> الدورة تسوى وزنها ذهب يا عيال لا تفوتكم</div>
-            <div class="comment-item"><span>3. خالد الروقي:</span> الله يوفقك، الشرح غير مفاهيمي بالكامل</div>
-            <div class="comment-item"><span>4. عبدالله:</span> الشرح يبرد الكبد، وافي وكافي</div>
-            <div class="comment-item"><span>5. يوسف:</span> الدورة واضحة حتى للي ما يفهم بالتقنية</div>
-            <div class="comment-item"><span>6. فارس:</span> دورة الهكر الاخلاقي عند سعود هي الصح</div>
-            <div class="comment-item"><span>7. مساعد:</span> انصح بالدورة للي يبي يتعلم صدق</div>
-            <div class="comment-item"><span>8. هاني:</span> دورة ممتازة ودعم فني مستمر ما قصرت</div>
-            <div class="comment-item"><span>9. أبو ريان:</span> تعامل راقي وسرعة بالرد، الله يبارك لك</div>
-            <div class="comment-item"><span>10. فيصل:</span> كنت خايف بس طلع الرجال ثقة وثقة جداً</div>
-            <div class="comment-item"><span>11. ماجد العتيبي:</span> بيض الله وجهك على هالمحتوى المطنوخ</div>
-            <div class="comment-item"><span>12. تركي:</span> بديت من الصفر والحين فاهم كل شي</div>
-            <div class="comment-item"><span>13. فهد السهلي:</span> المصداقية عند سعود فوق كل اعتبار</div>
-            <div class="comment-item"><span>14. بندر:</span> والله اني استفدت فايدة ما توقعتها</div>
-            <div class="comment-item"><span>15. نايف الشمري:</span> من جربت الدورة ارتحت، شغل مرتب</div>
-            <div class="comment-item"><span>16. سلطان:</span> أفضل محتوى تقني مر علي للأمانة</div>
-            <div class="comment-item"><span>17. حمد:</span> سعود راعي فزعات وشرحه يوصل بسرعة</div>
-            <div class="comment-item"><span>18. سعد الدوسري:</span> أطلق دورة وربي، سرعة وإتقان</div>
-            <div class="comment-item"><span>19. عزوز:</span> ياشيخ الله يرحم والديك على هالمعلومات</div>
-            <div class="comment-item"><span>20. بدر:</span> انصح الجميع بالاشتراك بدون تردد</div>
-            <div class="comment-item"><span>21. سطام:</span> الله يبيض وجهك يالامير على الشغل النظيف</div>
-            <div class="comment-item"><span>22. سلمان:</span> الدورة متعوب عليها وتستاهل كل ريال</div>
-            <div class="comment-item"><span>23. راكان:</span> تسلم يمينك يا سعود، ما قصرت معنا</div>
-            <div class="comment-item"><span>24. منصور:</span> افضل مدرب أمن سيبراني بلا منازع</div>
-            <div class="comment-item"><span>25. أبو سارة:</span> الله يبارك لك في حلالك، دورة بطلة</div>
-            <div class="comment-item"><span>26. وليد:</span> المحتوى دسم والشرح سهل جداً</div>
-            <div class="comment-item"><span>27. ثامر:</span> تم تفعيل الدورة بثواني، شكراً لك</div>
-            <div class="comment-item"><span>28. سامي:</span> فزعة ومرجلة، هذا سعود اللي نعرفه</div>
-            <div class="comment-item"><span>29. مشعل:</span> ميزة سعود إنه يعطيك المختصر المفيد</div>
-            <div class="comment-item"><span>30. حمود:</span> شغل احترافي ورسمي، كفو</div>
-            <div class="comment-item"><span>31. فايز:</span> ما ندمت اني دفعت فيها، تستاهل</div>
-            <div class="comment-item"><span>32. مساعد:</span> الشرح العملي هو اللي فرق معي</div>
-            <div class="comment-item"><span>33. أحمد:</span> شكرا لك من القلب يا وحش</div>
-            <div class="comment-item"><span>34. طلال:</span> كنت ضايع والحين عرفت الطريق صح</div>
-            <div class="comment-item"><span>35. عمر:</span> الدورة ذي غيرت حياتي المهنية</div>
-            <div class="comment-item"><span>36. جابر:</span> اشهد بالله انه ثقة وامين</div>
-            <div class="comment-item"><span>37. علي:</span> جودة في الطرح وسرعة في الرد</div>
-            <div class="comment-item"><span>38. مشاري:</span> المعلومات اللي بالدورة ما تلقاها باي مكان</div>
-            <div class="comment-item"><span>39. ابونايف:</span> تستاهل كل خير يا سعود يالامير</div>
-            <div class="comment-item"><span>40. ريان:</span> الله يرفع قدرك، استفدنا كثير</div>
-            <div class="comment-item"><span>41. باسم:</span> لغة الشرح مفهومة وبسيطة جداً</div>
-            <div class="comment-item"><span>42. ابراهيم:</span> افضل استثمار سويته بـ 2026</div>
-            <div class="comment-item"><span>43. غانم:</span> كفيت ووفيت يا سعود، شرح وافي</div>
-            <div class="comment-item"><span>44. حاتم:</span> انصح بالاشتراك وبقوة يا شباب</div>
-            <div class="comment-item"><span>45. نبيل:</span> الدورة شاملة لكل شي تحتاجه</div>
-            <div class="comment-item"><span>46. رائد:</span> الله يرزقك من واسع فضله، شكراً</div>
-            <div class="comment-item"><span>47. سالم:</span> الدورة خرافية والتطبيق العملي فيها بطل</div>
-            <div class="comment-item"><span>48. معاذ:</span> مجهود جبار تشكر عليه يا سعود</div>
-            <div class="comment-item"><span>49. ممدوح:</span> الحين أقدر أقول إني محترف حماية</div>
-            <div class="comment-item"><span>50. نواف:</span> ختامها مسك، أطلق دورة مع أطلق مدرب</div>
-        </div>
-    </div>
+            <div class="comment-item"><span>منصور:</span> افضل مدرب أمن سيبراني بلا منازع</div>
+            <div class="comment-item"><span>أبو سارة:</span> الله يبارك لك في حلالك، دورة بطلة</div>
+            <div class="comment-item"><span>وليد:</span> المحتوى دسم والشرح سهل جداً</div>
+            <div class="comment-item"><span>ثامر:</span> تم تفعيل الدورة بثواني، شكراً لك</div>
+            <div class="comment-item"><span>سامي:</span> فزعة ومرجلة، هذا سعود اللي نعرفه</div>
+            <div class="comment-item"><span>مشعل:</span> ميزة سعود إنه يعطيك المختصر المفيد</div>
+            <div class="comment-item"><span>حمود:</span> شغل احترافي ورسمي، كفو</div>
+            <div class="comment-item"><span>فايز:</span> ما ندمت اني دفعت فيها، تستاهل</div>
+            <div class="comment-item"><span>أحمد:</span> شكرا لك من القلب يا وحش</div>
+            <div class="comment-item"><span>طلال:</span> كنت ضايع والحين عرفت الطريق صح</div>
+            <div class="comment-item"><span>عمر:</span> الدورة ذي غيرت حياتي المهنية</div>
+            <div class="comment-item"><span>جابر:</span> اشهد بالله انه ثقة وامين</div>
+            <div class="comment-item"><span>علي:</span> جودة في الطرح وسرعة في الرد</div>
+            <div class="comment-item"><span>مشاري:</span> المعلومات اللي بالدورة ما تلقاها باي مكان</div>
+            <div class="comment-item"><span>ابونايف:</span> تستاهل كل خير يا سعود يالامير</div>
+            <div class="comment-item"><span>ريان:</span> الله يرفع قدرك، استفدنا كثير</div>
+            <div class="comment-item"><span>باسم:</span> لغة الشرح مفهومة وبسيطة جداً</div>
+            <div class="comment-item"><span>ابراهيم:</span> افضل استثمار سويته بـ 2026</div>
+            <div class="comment-item"><span>غانم:</span> كفيت ووفيت يا سعود، شرح وافي</div>
+            <div class="comment-item"><span>حاتم:</span> انصح بالاشتراك وبقوة يا شباب</div>
+            <div class="comment-item"><span>نبيل:</span> الدورة شاملة لكل شي تحتاجه</div>
+            <div class="comment-item"><span>رائد:</span> الله يرزقك من واسع فضله، شكراً</div>
+            <div class="comment-item"><span>سالم:</span> الدورة خرافية والتطبيق العملي فيها بطل</div>
+            <div class="comment-item"><span>معاذ:</span> مجهود جبار تشكر عليه يا سعود</div>
+            <div class="comment-item"><span>ممدوح:</span> الحين أقدر أقول إني محترف حماية</div>
+            <div class="comment-item"><span>نواف:</span> ختامها مسك، أطلق دورة مع أطلق مدرب</div>
         </div>
     </div>
 
-    <div class="max-w-4xl mx-auto px-6 mt-12 flex justify-between items-center bg-slate-800/30 backdrop-blur p-5 rounded-2xl border border-slate-700 shadow-xl">
-        <div class="flex items-center gap-3">
-            <div class="flex text-yellow-400 text-xl font-serif">★★★★★</div>
+    <div class="max-w-5xl mx-auto px-6 mt-16 flex justify-between items-center bg-slate-900/40 backdrop-blur-xl p-6 rounded-3xl border border-slate-800/50 shadow-2xl relative z-10">
+        <div class="flex items-center gap-4">
+            <div class="flex text-yellow-400 text-2xl font-serif">★★★★★</div>
             <div class="text-right">
-                <p class="text-white font-bold leading-none text-xl">4.9/5</p>
-                <p class="text-xs text-slate-400 mt-1">تقييم الطلاب</p>
+                <p class="text-white font-black leading-none text-2xl">4.9/5</p>
+                <p class="text-sm text-slate-400 mt-1">تقييم الطلاب الخريجين</p>
             </div>
         </div>
 
-        <div class="flex items-center gap-3 text-left">
+        <div class="flex items-center gap-4 text-left">
             <div class="text-left">
-                <p class="text-blue-400 font-black text-3xl" id="subscriber-count">0</p>
-                <p class="text-xs text-slate-400 mt-1">طالب مشترك</p>
+                <p class="text-blue-400 font-black text-4xl" id="subscriber-count">0</p>
+                <p class="text-sm text-slate-400 mt-1">طالب مشترك حالياً</p>
             </div>
-            <div class="bg-blue-500/20 p-2.5 rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="bg-blue-600/10 p-4 rounded-2xl border border-blue-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
             </div>
         </div>
     </div>
 
-    <header class="pt-16 pb-24 px-4 text-center">
-        <div class="mb-8 flex justify-center">
-            <div class="w-32 h-32 bg-blue-600 rounded-full flex items-center justify-center glow-logo border-4 border-slate-900">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04c0 4.833 1.123 9.447 3.144 13.523L12 23l7.474-3.493a11.955 11.955 0 013.144-13.523z" />
-                </svg>
+    <header class="pt-20 pb-28 px-4 text-center relative z-10">
+        <div class="mb-10 flex justify-center">
+            <div class="w-36 h-36 saud-avatar-pulse border-4 border-slate-900 shadow-2xl overflow-hidden bg-slate-800">
+                <img src="https://api.dicebear.com/8.x/notionists-neutral/svg?seed=Saud&backgroundColor=3b82f6" alt="المدرب سعود" class="w-full h-full object-cover"/>
             </div>
         </div>
 
-        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
-            دورة <span class="text-blue-500">الاختراق الأخلاقي</span>
+        <span class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-sm font-medium mb-4 backdrop-blur-sm">
+            المنصة التدريبية الرسمية للمدرب سعود
+        </span>
+
+        <h1 class="text-6xl md:text-7xl font-900 mb-8 tracking-tighter leading-tight">
+            دورة <span class="text-blue-500 relative">الاختراق الأخلاقي
+                <svg class="absolute -bottom-2 left-0 w-full h-2 text-blue-600" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </span>
         </h1>
         
-        <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-            تعلم أسرار الحماية والثغرات بأسلوب عملي. انضم الآن لأكبر مجتمع تقني في المملكة.
+        <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-14 leading-relaxed font-normal">
+            انطلق من الصفر حتى الاحتراف في عالم الأمن السيبراني. تطبيق عملي مكثف على أحدث أدوات الحماية والثغرات، بأسلوب سعود المبسط والوافي.
         </p>
 
-        <div class="flex flex-col items-center gap-6">
+        <div class="flex flex-col items-center gap-8">
             <a href="register.html?item=دورة الاختراق الأخلاقي&price=800" 
-               class="px-14 py-5 bg-blue-600 text-white font-black rounded-full text-2xl shadow-2xl hover:bg-blue-500 hover:scale-105 transition-all duration-300">
-                اشترك الآن (800 ريال)
+               class="px-16 py-6 btn-primary text-white font-900 rounded-2xl text-2xl shadow-2xl hover:scale-105 transition-all duration-300 ease-out">
+                حجز مقعدك الآن (800 ريال فقط)
             </a>
             
-            <span class="whatsapp-note italic text-blue-400 opacity-90">
-                * بعد السداد، سيتم التواصل معك مباشرة عبر الواتساب لتفعيل اشتراكك.
-            </span>
+            <div class="flex items-center gap-3 bg-slate-900/80 p-4 rounded-xl border border-slate-800 backdrop-blur-sm">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
+                <span class="text-sm text-slate-400">
+                    بعد السداد، سيتم تفعيل اشتراكك وتجهيز حسابك فوراً عبر الواتساب الرسمي.
+                </span>
+            </div>
         </div>
     </header>
 
-    <footer class="py-10 text-center border-t border-slate-900/50 text-gray-600 text-xs">
-        <p>© 2026 جميع الحقوق محفوظة لمتجر سعود</p>
+    <footer class="py-12 text-center border-t border-slate-800/50 bg-slate-950/50 relative z-10 backdrop-blur-sm">
+        <p class="text-sm text-slate-500">© 2026 جميع الحقوق محفوظة. المنصة البرمجية للمدرب سعود.</p>
+        <p class="text-xs text-slate-700 mt-2">توثيق رسمي - دورات تدريبية معتمدة في الأمن السيبراني</p>
     </footer>
 
     <script>
-        // دالة العداد المتحرك
+        // 1. تشغيل عداد المشتركين (كما هو)
         function animateValue(obj, start, end, duration) {
             let startTimestamp = null;
             const step = (timestamp) => {
@@ -215,10 +247,60 @@
             window.requestAnimationFrame(step);
         }
 
+        // 2. كود الخلفية البرمجية المتحركة (Matrix Rain Effect - Blue Version)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+
+        const characters = '01アカサタナハマヤラワガザダバパイキシチニヒミリヰギジヂビピウクスツヌフムユルグズブヅプエケセテネヘメレヱゲゼデベペオコソトノホモヨロヲゴゾドボポvンV010101';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            // خلفية سوداء شفافة قليلاً لخلق تأثير السحب
+            ctx.fillStyle = 'rgba(2, 6, 23, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#1e4ed8'; // لون الكود الأزرق
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        // إعدادات التشغيل عند التحميل
         window.onload = () => {
+            // تشغيل العداد
             const obj = document.getElementById("subscriber-count");
             animateValue(obj, 0, 2676, 3000); 
+
+            // تشغيل الانيميشن (تقليل السرعة لجعلها مريحة للعين)
+            setInterval(drawMatrix, 50);
         };
+
+        // تحديث أبعاد الكانفاس عند تغيير حجم النافذة
+        window.addEventListener('resize', () => {
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+            const columns = canvas.width / fontSize;
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+        });
     </script>
 </body>
 </html>
