@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تأكيد الاشتراك | منصة أوهام</title>
+    <title>تأكيد الاشتراك | دورة المدرب سعود</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
         
         body { 
             font-family: 'Cairo', sans-serif; 
@@ -23,71 +23,69 @@
         }
 
         .electric-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(25px);
             border: 1px solid rgba(59, 130, 246, 0.2);
             padding: 40px;
-            border-radius: 30px;
-            width: 100%;
+            border-radius: 35px;
+            width: 90%;
             max-width: 500px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
-            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* تأثير الالتماس الكهربائي للنصوص */
         .electric-text {
             color: #fff;
-            text-shadow: 0 0 10px #3b82f6;
-            animation: glitch 2s infinite;
-        }
-        @keyframes glitch {
-            0%, 100% { opacity: 1; }
-            95% { opacity: 1; text-shadow: 0 0 10px #3b82f6; }
-            96% { opacity: 0.7; text-shadow: none; }
-            97% { opacity: 1; text-shadow: 0 0 20px #ff0000; }
-            98% { opacity: 0.8; }
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
         }
 
-        .input-group label { display: block; font-size: 12px; color: #94a3b8; margin-bottom: 8px; margin-right: 5px; }
+        .input-group label { display: block; font-size: 14px; font-weight: 700; color: #f8fafc; margin-bottom: 4px; margin-right: 5px; }
+        .input-group .helper-text { font-size: 11px; color: #64748b; margin-bottom: 12px; margin-right: 5px; }
         
         .input-style {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white; width: 100%; padding: 14px; border-radius: 15px; margin-bottom: 20px;
+            color: white; width: 100%; padding: 14px; border-radius: 15px;
             outline: none; transition: 0.3s;
         }
-        .input-style:focus { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
+        .input-style:focus { border-color: #3b82f6; background: rgba(59, 130, 246, 0.05); }
 
-        /* سداد المضيء والقابل للنسخ */
         .sadad-container {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(30, 58, 138, 0.4));
-            border: 2px dashed #3b82f6;
+            border: 2px dashed rgba(59, 130, 246, 0.4);
             border-radius: 20px;
             padding: 20px;
-            margin-bottom: 25px;
+            margin: 15px 0;
             cursor: pointer;
             transition: 0.3s;
-            position: relative;
         }
-        .sadad-container:hover { background: rgba(59, 130, 246, 0.2); transform: scale(1.02); }
-        .sadad-number { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; color: #60a5fa; }
+        .sadad-container:hover { border-color: #3b82f6; background: rgba(59, 130, 246, 0.15); }
 
-        /* زر إرفاق الملف */
         .file-upload {
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.02);
-            padding: 15px; border-radius: 15px; text-align: center;
-            cursor: pointer; margin-bottom: 25px; transition: 0.3s;
+            padding: 20px; border-radius: 15px; text-align: center;
+            cursor: pointer; transition: 0.3s; margin-top: 10px;
         }
-        .file-upload:hover { background: rgba(255, 255, 255, 0.05); border-color: #94a3b8; }
+        .file-upload.has-file { border-color: #22c55e; background: rgba(34, 197, 94, 0.05); }
 
         .btn-buy {
             background: #3b82f6;
             color: white; width: 100%; padding: 18px; border-radius: 18px;
             font-weight: 900; font-size: 1.2rem; transition: 0.4s;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+            margin-top: 25px;
         }
-        .btn-buy:hover { transform: translateY(-3px); box-shadow: 0 0 30px #3b82f6; }
+        
+        /* حالة الزر المعطل */
+        .btn-buy:disabled {
+            background: #1e293b;
+            color: #475569;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .btn-buy:not(:disabled):hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.5); }
 
         .hidden { display: none; }
     </style>
@@ -96,50 +94,69 @@
     <div class="ambient-bg"></div>
 
     <div id="payment-card" class="electric-card">
-        <h2 class="text-2xl font-black text-center mb-6 electric-text">تأكيد عملية الشراء</h2>
+        <h2 class="text-2xl font-black text-center mb-8 electric-text underline decoration-blue-500 decoration-4 underline-offset-8">بيانات السداد</h2>
         
         <div class="input-group text-right">
-            <label>الاسم الكامل</label>
-            <input type="text" class="input-style" placeholder="أدخل اسمك هنا">
+            <label>الاسم الثلاثي</label>
+            <p class="helper-text">* يرجى كتابة اسمك الحقيقي لإصدار الشهادة لاحقاً.</p>
+            <input type="text" id="user-name" class="input-style mb-4" placeholder="مثال: نايف ناصر الشمري" required oninput="validateForm()">
 
-            <label>رقم الجوال</label>
-            <input type="tel" class="input-style text-left" placeholder="05xxxxxxxx" dir="ltr">
+            <label>رقم الجوال (واتساب)</label>
+            <p class="helper-text">* سيتم إرسال بيانات الدخول للدورة عبر هذا الرقم.</p>
+            <input type="tel" id="user-phone" class="input-style text-left mb-4" placeholder="05xxxxxxxx" dir="ltr" required oninput="validateForm()">
 
-            <label>رقم حساب سداد (اضغط للنسخ)</label>
+            <label>رقم حساب سداد</label>
+            <p class="helper-text">* اضغط على الرقم لنسخه ثم قم بالتحويل من تطبيق بنكك.</p>
             <div class="sadad-container text-center" onclick="copySadad()">
-                <span class="text-[10px] block text-blue-300 mb-1 uppercase tracking-widest">SADAD ACCOUNT</span>
-                <span id="sadad-num" class="sadad-number">82492135384</span>
-                <div id="copy-msg" class="text-[9px] text-green-400 mt-2 opacity-0 transition-all">تم النسخ بنجاح!</div>
+                <span class="text-[10px] block text-blue-300 mb-1 uppercase tracking-widest font-bold">SADAD ACCOUNT</span>
+                <span id="sadad-num" class="text-2xl font-black tracking-widest text-white">82492135384</span>
+                <div id="copy-msg" class="text-[10px] text-green-400 mt-2 opacity-0 transition-all font-bold italic">تم النسخ بنجاح!</div>
             </div>
 
-            <label>إرفاق صورة التحويل (إيصال السداد)</label>
-            <div class="file-upload" onclick="document.getElementById('file-input').click()">
-                <span class="text-sm text-slate-400" id="file-name">اضغط هنا لإرفاق الملف 📎</span>
-                <input type="file" id="file-input" class="hidden" onchange="updateFileName(this)">
+            <label>إيصال التحويل</label>
+            <p class="helper-text">* قم برفع صورة الشاشة (Screenshot) لعملية التحويل الناجحة.</p>
+            <div class="file-upload" id="file-zone" onclick="document.getElementById('file-input').click()">
+                <span class="text-sm text-slate-400 font-bold" id="file-name">إرفاق إيصال السداد 📎</span>
+                <input type="file" id="file-input" class="hidden" accept="image/*" onchange="updateFileName(this)">
             </div>
         </div>
 
-        <button onclick="processOrder()" class="btn-buy">تأكيد الشراء الآن</button>
+        <button id="submit-btn" onclick="processOrder()" class="btn-buy" disabled>تأكيد العملية</button>
     </div>
 
     <div id="success-card" class="electric-card hidden text-center">
-        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(34,197,94,0.4)]">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="w-24 h-24 bg-green-500/20 border-2 border-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_40px_rgba(34,197,94,0.2)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
             </svg>
         </div>
-        <h2 class="text-3xl font-black mb-4 electric-text">تم تأكيد الطلب!</h2>
-        <div class="text-slate-300 space-y-4 text-sm leading-relaxed mb-8">
-            <p>شكراً لثقتكم بـ <span class="text-blue-400 font-bold">منصة أوهام</span>.</p>
-            <p>تم استلام بياناتك وإيصال التحويل بنجاح. سيقوم القسم التقني بمراجعة الطلب وتفعيل حسابك فوراً.</p>
-            <p class="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20 text-blue-300">
-                سيصلك رد عبر <span class="font-bold">الواتساب</span> خلال دقائق قليلة.
+        <h2 class="text-3xl font-black mb-4 text-white">تم استلام طلبك!</h2>
+        <div class="text-slate-300 space-y-4 text-md leading-relaxed mb-8">
+            <p>شكراً لك <span id="display-name" class="text-blue-400 font-bold"></span>.</p>
+            <p>جاري مراجعة إيصال التحويل من قبل فريق المدرب سعود.</p>
+            <p class="bg-blue-500/10 p-4 rounded-xl border border-blue-500/20 text-blue-300 font-bold">
+                توقع رسالة تفعيل عبر الواتساب خلال 5 - 15 دقيقة.
             </p>
         </div>
-        <button onclick="location.href='index.html'" class="text-xs text-slate-500 underline hover:text-white transition-all">العودة للمنصة الرئيسية</button>
+        <button onclick="location.href='index.html'" class="text-sm text-slate-500 hover:text-white transition-all italic">العودة للرئيسية</button>
     </div>
 
     <script>
+        // دالة التحقق من صحة النموذج
+        function validateForm() {
+            const name = document.getElementById('user-name').value.trim();
+            const phone = document.getElementById('user-phone').value.trim();
+            const file = document.getElementById('file-input').files.length;
+            const btn = document.getElementById('submit-btn');
+
+            // إذا كان الاسم أكثر من 5 حروف والرقم موجود والملف مرفوع
+            if (name.length >= 5 && phone.length >= 10 && file > 0) {
+                btn.disabled = false;
+            } else {
+                btn.disabled = true;
+            }
+        }
+
         // دالة النسخ
         function copySadad() {
             const num = document.getElementById('sadad-num').innerText;
@@ -149,23 +166,37 @@
             setTimeout(() => msg.style.opacity = '0', 2000);
         }
 
-        // تحديث اسم الملف عند الرفع
+        // تحديث اسم الملف والتحقق
         function updateFileName(input) {
-            const name = input.files[0] ? input.files[0].name : "اضغط هنا لإرفاق الملف 📎";
-            document.getElementById('file-name').innerText = name;
-            document.getElementById('file-name').classList.add('text-blue-400');
+            const fileName = input.files[0] ? input.files[0].name : "إرفاق إيصال السداد 📎";
+            const label = document.getElementById('file-name');
+            const zone = document.getElementById('file-zone');
+            
+            label.innerText = fileName;
+            
+            if (input.files[0]) {
+                label.classList.add('text-green-400');
+                zone.classList.add('has-file');
+            } else {
+                label.classList.remove('text-green-400');
+                zone.classList.remove('has-file');
+            }
+            validateForm();
         }
 
-        // معالجة الطلب
+        // معالجة الطلب النهائي
         function processOrder() {
+            const name = document.getElementById('user-name').value;
+            document.getElementById('display-name').innerText = name;
+            
             document.getElementById('payment-card').classList.add('hidden');
             document.getElementById('success-card').classList.remove('hidden');
             
-            // تأثير نبض خفيف عند النجاح
+            // وميض بسيط للنجاح
             document.body.style.backgroundColor = "#064e3b";
             setTimeout(() => {
                 document.body.style.backgroundColor = "#020617";
-            }, 500);
+            }, 600);
         }
     </script>
 </body>
