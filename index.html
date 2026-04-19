@@ -3,59 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OXR | المتجر الرسمي</title>
+    <title>OXR | المتجر البركاني الرسمي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #020617;
+            background-color: #050000;
             color: white;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         .ambient-glow {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% -20%, #450a0a 0%, #020617 80%);
+            background: radial-gradient(circle at 50% -10%, #7f1d1d 0%, #050000 70%);
             z-index: -1;
         }
 
-        /* اسم المتجر المزخرف والملتهب */
-        .flame-text {
-            font-size: 5rem;
+        .oxr-logo {
+            font-size: 6rem;
             font-weight: 900;
-            color: #ff0000;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4d4d, 0 0 40px #ff0000;
-            animation: flicker 1.5s infinite alternate;
-            letter-spacing: 5px;
+            color: #ff2a00;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff4500;
+            animation: magma 2s infinite alternate;
+            letter-spacing: -2px;
         }
 
-        @keyframes flicker {
-            0%, 100% { opacity: 1; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4d4d, 0 0 40px #ff0000; }
-            50% { opacity: 0.8; text-shadow: 0 0 15px #ff0000, 0 0 30px #8b0000, 0 0 60px #ff0000; transform: scale(1.02); }
+        @keyframes magma {
+            0% { transform: scale(1); filter: brightness(1); }
+            100% { transform: scale(1.05); filter: brightness(1.3); }
         }
+
+        .trust-badge {
+            background: rgba(20, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 69, 0, 0.3);
+            border-radius: 50px;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center; gap: 15px;
+        }
+
+        /* بطاقات زجاجية عامة */
+        .glass-card {
+            background: rgba(20, 5, 5, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover { transform: translateY(-12px); box-shadow: 0 0 30px rgba(255, 69, 0, 0.2); }
+
+        /* إطار مستوحى من إنستقرام */
+        .instagram-card {
+            border: 2px solid transparent;
+            background-image: linear-gradient(rgba(20, 5, 5, 0.6), rgba(20, 5, 5, 0.6)), 
+                              linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+        .instagram-card:hover {
+            box-shadow: 0 0 25px rgba(220, 39, 67, 0.4);
+        }
+
+        .btn-buy {
+            background: linear-gradient(135deg, #ff4500 0%, #b91c1c 100%);
+            color: white; font-weight: 800; transition: 0.3s;
+        }
+        .btn-buy:hover { filter: brightness(1.2); transform: scale(1.05); box-shadow: 0 0 20px #ff4500; }
 
         /* شريط التعليقات */
-        .ticker-container {
-            width: 100%; overflow: hidden; background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid #450a0a; padding: 12px 0; white-space: nowrap;
-        }
-        .ticker-wrapper { display: inline-block; animation: ticker-scroll 120s linear infinite; }
-        .comment-item { display: inline-block; margin-left: 50px; color: #94a3b8; font-size: 0.9rem; }
-        .comment-item span { color: #ef4444; font-weight: bold; }
-
+        .ticker-container { width: 100%; overflow: hidden; background: rgba(0,0,0,0.8); border-bottom: 2px solid #7f1d1d; padding: 10px 0; }
+        .ticker-wrapper { display: inline-block; animation: ticker-scroll 100s linear infinite; white-space: nowrap; }
+        .comment-item { display: inline-block; margin-left: 60px; color: #d1d5db; }
         @keyframes ticker-scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-
-        /* البطاقات الزجاجية */
-        .glass-card {
-            background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s;
-        }
-        .glass-card:hover { transform: translateY(-8px); border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); }
-
-        .btn-action { background: linear-gradient(90deg, #b91c1c 0%, #7f1d1d 100%); transition: 0.3s; }
-        .btn-action:hover { filter: brightness(1.2); box-shadow: 0 0 15px #ef4444; }
     </style>
 </head>
 <body>
@@ -63,101 +84,98 @@
 
     <div class="ticker-container">
         <div class="ticker-wrapper">
-            <div class="comment-item"><span>أبو فهد:</span> عز الله مقامك يا OXR، السناب رجع بثواني</div>
-            <div class="comment-item"><span>مطلق العتيبي:</span> يوزر مطنوخ وراعي فزعات بيض الله وجهك</div>
-            <div class="comment-item"><span>صالح:</span> الدورة تسوى وزنها ذهب يا عيال لا تفوتكم</div>
-            <div class="comment-item"><span>نايف الشمري:</span> من جربت فك الحظر عنده ارتحت، ثقة</div>
-            <div class="comment-item"><span>سلطان:</span> شريت يوزر ثنائي من OXR، قسماً بالله فخامة</div>
+            <div class="comment-item"><span>بدر الحربي:</span> يوزر إنستقرام الثنائي فخامة، شكراً OXR</div>
+            <div class="comment-item"><span>نايف:</span> فكيت حظر السناب بـ 5 دقايق، بطل!</div>
+            <div class="comment-item"><span>سلطان:</span> التعامل مع OXR يبرد الكبد، سرعة خرافية</div>
         </div>
     </div>
 
-    <div class="flex justify-center mt-8">
-        <div class="bg-slate-800/50 backdrop-blur px-6 py-3 rounded-full border border-red-900/30 flex items-center gap-4 shadow-xl">
-            <div class="flex text-red-500 text-lg order-2">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+    <header class="pt-20 pb-12 px-4 text-center flex flex-col items-center">
+        <h1 class="oxr-logo mb-6">OXR</h1>
+        <div class="trust-badge mb-10">
+            <div class="flex flex-col items-start border-e border-white/10 pe-4">
+                <span id="buyer-count" class="text-2xl font-black text-white">0</span>
+                <span class="text-[10px] uppercase tracking-widest text-slate-400">عملية شراء ناجحة</span>
             </div>
-            <div class="flex flex-col items-start order-1 border-l border-slate-700 pl-4">
-                <span class="text-xs text-slate-400">إجمالي المشترين</span>
-                <span id="buyer-count" class="text-xl font-black text-white">0</span>
+            <div class="flex flex-col items-center">
+                <div class="flex text-yellow-500 text-xl">★ ★ ★ ★ ★</div>
+                <span class="text-[10px] text-slate-300">تقييم العملاء 4.9/5</span>
             </div>
-        </div>
-    </div>
-
-    <header class="pt-16 pb-12 px-4 text-center">
-        <h1 class="flame-text mb-2">OXR</h1>
-        <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10">الوجهة الأقوى لخدمات فك الحظر واليوزرات النادرة.</p>
-
-        <div class="flex flex-wrap justify-center gap-4">
-            <a href="#store" class="px-10 py-4 bg-transparent text-white font-bold rounded-full border border-red-600 hover:bg-red-600/10 transition-all">دخول المتجر</a>
-            <a href="#" class="px-10 py-4 btn-action text-white font-bold rounded-full shadow-lg">اشتراك الدورة (800 ريال)</a>
         </div>
     </header>
 
-    <section id="store" class="max-w-6xl mx-auto px-6 pb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section id="store" class="max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div class="glass-card instagram-card p-8 rounded-3xl flex flex-col items-center text-center">
+            <div class="w-16 h-16 bg-gradient-to-tr from-[#f09433] to-[#bc1888] text-white rounded-2xl flex items-center justify-center mb-6">
+                <span class="font-black text-2xl">2D</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">إنستقرام ثنائي</h3>
+            <p class="text-slate-400 text-sm mb-6">يوزر إنستقرام ثنائي VIP نادر جداً.</p>
+            <div class="text-3xl font-black text-white mb-6">390 <span class="text-sm text-[#dc2743]">ريال</span></div>
+            <a href="register.html?item=إنستقرام ثنائي&price=390" class="btn-buy w-full py-4 rounded-2xl">شراء فوري</a>
+        </div>
+
+        <div class="glass-card instagram-card p-8 rounded-3xl flex flex-col items-center text-center">
+            <div class="w-16 h-16 bg-gradient-to-tr from-[#f09433] to-[#bc1888] text-white rounded-2xl flex items-center justify-center mb-6">
+                <span class="font-black text-2xl">3D</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">إنستقرام ثلاثي</h3>
+            <p class="text-slate-400 text-sm mb-6">يوزر إنستقرام ثلاثي مميز وشبه رباعي.</p>
+            <div class="text-3xl font-black text-white mb-6">200 <span class="text-sm text-[#dc2743]">ريال</span></div>
+            <a href="register.html?item=إنستقرام ثلاثي&price=200" class="btn-buy w-full py-4 rounded-2xl">شراء فوري</a>
+        </div>
+
         <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center">
-            <div class="w-16 h-16 bg-red-600/20 text-red-500 rounded-2xl flex items-center justify-center mb-6">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            <div class="w-16 h-16 bg-orange-600/20 text-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
             </div>
             <h3 class="text-2xl font-bold mb-2">فك حظر سناب</h3>
-            <p class="text-slate-400 text-sm mb-6">فك حظر الجهاز والحساب بشكل رسمي.</p>
-            <div class="text-3xl font-black text-red-500 mb-6">150 ريال</div>
-            <a href="#" class="btn-action w-full py-3 rounded-xl font-bold">شراء الآن</a>
-        </div>
-
-        <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center border-red-500/20">
-            <div class="w-16 h-16 bg-red-600/20 text-red-500 rounded-2xl flex items-center justify-center mb-6">
-                <span class="font-black text-xl">2D</span>
-            </div>
-            <h3 class="text-2xl font-bold mb-2">يوزر ثنائي</h3>
-            <p class="text-slate-400 text-sm mb-6">يوزرات VIP نادرة جداً ومميزة.</p>
-            <div class="text-3xl font-black text-white mb-6">350 ريال</div>
-            <a href="#" class="btn-action w-full py-3 rounded-xl font-bold">شراء الآن</a>
+            <p class="text-slate-400 text-sm mb-6">حل نهائي لحظر الجهاز والحساب الرسمي.</p>
+            <div class="text-3xl font-black text-white mb-6">150 <span class="text-sm text-orange-500">ريال</span></div>
+            <a href="register.html?item=فك حظر سناب&price=150" class="btn-buy w-full py-4 rounded-2xl">شراء فوري</a>
         </div>
 
         <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center">
             <div class="w-16 h-16 bg-red-600/20 text-red-500 rounded-2xl flex items-center justify-center mb-6">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                <span class="font-black text-2xl text-red-500">2D</span>
             </div>
-            <h3 class="text-2xl font-bold mb-2">دورة الحماية</h3>
-            <p class="text-slate-400 text-sm mb-6">تعلم أساسيات الأمن السيبراني والحماية.</p>
-            <div class="text-3xl font-black text-red-500 mb-6">800 ريال</div>
-            <a href="#" class="btn-action w-full py-3 rounded-xl font-bold">اشترك الآن</a>
+            <h3 class="text-2xl font-bold mb-2">تيك توك ثنائي</h3>
+            <p class="text-slate-400 text-sm mb-6">يوزرات تيك توك فخمة ونادرة جداً.</p>
+            <div class="text-3xl font-black text-white mb-6">350 <span class="text-sm text-red-500">ريال</span></div>
+            <a href="register.html?item=يوزر تيك توك ثنائي&price=350" class="btn-buy w-full py-4 rounded-2xl">شراء فوري</a>
         </div>
+
+        <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center">
+            <div class="w-16 h-16 bg-orange-600/20 text-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">دورة الاختراق</h3>
+            <p class="text-slate-400 text-sm mb-6">تعلم حماية حساباتك وأمنك السيبراني.</p>
+            <div class="text-3xl font-black text-white mb-6">800 <span class="text-sm text-orange-500">ريال</span></div>
+            <a href="register.html?item=دورة الاختراق الأخلاقي&price=800" class="btn-buy w-full py-4 rounded-2xl">اشتراك الآن</a>
+        </div>
+
     </section>
 
     <script>
-        function animateCounter(id, start, end, duration) {
-            let obj = document.getElementById(id);
+        function countUp(id, start, end, duration) {
+            let current = start;
             let range = end - start;
-            let minTimer = 50;
+            let increment = end > start ? 1 : -1;
             let stepTime = Math.abs(Math.floor(duration / range));
-            stepTime = Math.max(stepTime, minTimer);
-            let startTime = new Date().getTime();
-            let endTime = startTime + duration;
-            let timer;
-
-            function run() {
-                let now = new Date().getTime();
-                let remaining = Math.max((endTime - now) / duration, 0);
-                let value = Math.round(end - (remaining * range));
-                obj.innerHTML = value.toLocaleString();
-                if (value == end) {
-                    clearInterval(timer);
-                }
-            }
-
-            timer = setInterval(run, stepTime);
-            run();
+            let obj = document.getElementById(id);
+            let timer = setInterval(function() {
+                current += increment;
+                obj.textContent = current;
+                if (current == end) clearInterval(timer);
+            }, stepTime);
         }
-
-        // تشغيل العداد عند تحميل الصفحة من 0 إلى 334
-        window.onload = function() {
-            animateCounter("buyer-count", 0, 334, 2500);
-        };
+        window.onload = function() { countUp("buyer-count", 0, 376, 2500); };
     </script>
 
-    <footer class="py-8 text-center text-slate-600 text-xs border-t border-slate-900">
-        <p>© 2026 جميع الحقوق محفوظة لمتجر OXR</p>
+    <footer class="py-12 text-center">
+        <p class="text-slate-600 text-sm mb-2">جميع الحقوق محفوظة لمتجر OXR البركاني © 2026</p>
     </footer>
 </body>
 </html>
