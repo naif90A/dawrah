@@ -3,74 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OXR | إتمام الطلب</title>
+    <title>OXR | إتمام عملية الشراء</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #050000; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; min-height: screen; margin: 0; }
-        .magma { position: fixed; inset: 0; background: radial-gradient(circle at 50% 100%, #450a0a, #050000); z-index: -1; }
-        .card { background: rgba(20, 5, 5, 0.8); backdrop-filter: blur(15px); border: 1px solid #ff450033; padding: 40px; border-radius: 30px; width: 100%; max-width: 450px; text-align: center; }
-        .loader { font-size: 50px; animation: spin 2s linear infinite; display: none; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        body { background: #050000; color: white; font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; overflow-x: hidden; }
+        .magma-bg { position: fixed; inset: 0; background: radial-gradient(circle at 50% 100%, #450a0a, #050000); z-index: -1; }
+        
+        .checkout-card {
+            background: rgba(20, 5, 5, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 69, 0, 0.2);
+            padding: 40px;
+            border-radius: 35px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .input-group label { display: block; font-size: 12px; color: #94a3b8; margin-bottom: 8px; margin-right: 5px; }
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 69, 0, 0.2);
+            color: white;
+            width: 100%;
+            padding: 14px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-field:focus { border-color: #ff4500; background: rgba(255, 69, 0, 0.05); }
+
+        /* تأثير الدخان والتحميل */
+        #smoke-screen {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        .smoke-anim {
+            font-size: 60px;
+            filter: blur(2px);
+            animation: smoke-float 2s infinite;
+        }
+        @keyframes smoke-float {
+            0% { transform: translateY(0) scale(1); opacity: 0.5; }
+            50% { transform: translateY(-20px) scale(1.5); opacity: 0.2; }
+            100% { transform: translateY(-40px) scale(2); opacity: 0; }
+        }
+
+        .btn-pay {
+            background: linear-gradient(135deg, #ff4500, #b91c1c);
+            width: 100%;
+            padding: 18px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(185, 28, 28, 0.3);
+            transition: 0.3s;
+        }
+        .btn-pay:hover { transform: scale(1.02); filter: brightness(1.1); }
+
+        .success-box {
+            display: none;
+            border: 2px solid #22c55e;
+            background: rgba(20, 5, 5, 0.9);
+            padding: 30px;
+            border-radius: 30px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="magma"></div>
+    <div class="magma-bg"></div>
 
-    <div class="card" id="box">
-        <h1 id="title" class="text-2xl font-black text-orange-500 mb-6">تأكيد الشراء</h1>
+    <div id="checkout-form" class="checkout-card">
+        <h1 class="text-2xl font-black text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">معلومات الدفع والاستلام</h1>
         
-        <div id="info" class="bg-white/5 p-4 rounded-xl mb-6">
-            <p class="text-sm">المنتج: <span id="p-name" class="font-bold text-white">-</span></p>
-            <p class="text-sm">السعر: <span id="p-price" class="font-bold text-orange-500">-</span></p>
+        <div class="input-group">
+            <label>الاسم الكامل</label>
+            <input type="text" class="input-field" placeholder="أدخل اسمك الثلاثي">
+            
+            <label>رقم الجوال</label>
+            <input type="tel" class="input-field text-left" placeholder="05xxxxxxxx" dir="ltr">
+            
+            <label>رقم حساب سداد / بطاقة الدفع</label>
+            <input type="text" class="input-field text-left" placeholder="XXXX XXXX XXXX XXXX" dir="ltr">
+
+            <div class="bg-orange-500/10 border border-orange-500/20 p-4 rounded-2xl mb-6">
+                <p class="text-xs text-orange-400 font-bold mb-1">📋 حالة الحساب المستهدف:</p>
+                <ul class="text-[11px] text-slate-300 space-y-1">
+                    <li>• اليوزر المختار: <span id="target-user" class="text-white font-mono font-bold">...</span></li>
+                    <li>• حالة الحساب: <span class="text-green-500">نظيف 100%</span></li>
+                    <li>• التحذيرات: <span class="text-green-500">لا يوجد (سليم)</span></li>
+                    <li>• نوع الحساب: <span class="text-white font-bold">فخامة / VIP</span></li>
+                </ul>
+            </div>
         </div>
 
-        <input type="text" id="r-user" class="w-full p-3 rounded-lg bg-white/10 border border-orange-500/30 mb-4 text-center font-bold text-orange-400" readonly>
-        
-        <p class="text-[10px] text-slate-500 mb-6">* بعد إتمام الشراء، سيصلك معلومات الحساب فوراً هنا.</p>
+        <button onclick="processOrder()" class="btn-pay">إتمام الشراء الآن</button>
+        <p class="text-[10px] text-slate-500 text-center mt-4">بمجرد الدفع سيتم فحص معلوماتك وإظهار بيانات الحساب.</p>
+    </div>
 
-        <button onclick="pay()" id="btn" class="w-full py-4 bg-gradient-to-r from-orange-600 to-red-700 rounded-xl font-bold shadow-lg shadow-red-900/40">إتمام الدفع</button>
+    <div id="smoke-screen">
+        <div class="smoke-anim">💨</div>
+        <h2 class="text-xl font-bold mt-4 text-orange-500">جاري التأكد من عملية الدفع...</h2>
+        <p class="text-slate-400 mt-2 text-sm">ستصلك معلومات الحساب فوراً</p>
+    </div>
+
+    <div id="success-screen" class="checkout-card success-box">
+        <div class="text-5xl mb-4">💳</div>
+        <h2 class="text-2xl font-black text-green-500 mb-2">تم تأكيد الدفع بنجاح!</h2>
+        <p class="text-slate-400 text-sm mb-6">تمت الموافقة على الطلب، إليك بيانات الدخول:</p>
         
-        <div id="loading" class="mt-4">
-            <div class="loader" id="clock">⌛</div>
-            <p id="timer" class="hidden text-orange-500 font-bold mt-2">03:00</p>
+        <div class="bg-black/50 p-4 rounded-xl border border-dashed border-green-500/50 text-left mb-4">
+            <p class="text-xs text-slate-500">User:</p>
+            <p id="final-user" class="text-xl text-green-400 font-mono font-bold">--</p>
         </div>
+        <div class="bg-black/50 p-4 rounded-xl border border-dashed border-green-500/50 text-left">
+            <p class="text-xs text-slate-500">Password:</p>
+            <p class="text-xl text-green-400 font-mono font-bold">OXR_VIP_2026</p>
+        </div>
+
+        <button onclick="location.href='index.html'" class="mt-8 text-slate-500 text-xs underline">العودة للرئيسية</button>
     </div>
 
     <script>
-        // قراءة البيانات وتوليد يوزر
-        const params = new URLSearchParams(window.location.search);
-        document.getElementById('p-name').innerText = params.get('item') || 'منتج';
-        document.getElementById('p-price').innerText = (params.get('price') || '0') + ' ريال';
-        
-        const user = Math.random().toString(36).substring(2, 5); // يوزر عشوائي 3 رموز
-        document.getElementById('r-user').value = user;
-
-        function pay() {
-            document.getElementById('title').innerText = "جاري المعالجة...";
-            document.getElementById('btn').style.display = 'none';
-            document.getElementById('clock').style.display = 'inline-block';
-            document.getElementById('timer').classList.remove('hidden');
-
-            let time = 180;
-            const run = setInterval(() => {
-                time--;
-                let m = Math.floor(time / 60);
-                let s = time % 60;
-                document.getElementById('timer').innerText = `0${m}:${s < 10 ? '0'+s : s}`;
-                
-                if(time <= 0) {
-                    clearInterval(run);
-                    document.getElementById('box').innerHTML = `
-                        <h1 class="text-3xl text-green-500 font-black">✅ تم الشراء</h1>
-                        <div class="bg-white/5 p-6 rounded-2xl mt-4 text-left font-mono">
-                            <p>User: <span class="text-green-400">${user}</span></p>
-                            <p>Pass: OXR_9982</p>
-                        </div>
-                        <button onclick="location.href='index.html'" class="mt-6 text-slate-500 underline text-sm">العودة</button>
-                    `;
-                }
-            }, 1000);
+        // 1. توليد يوزر عشوائي عند التحميل
+        function setupPage() {
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let res = chars.charAt(Math.floor(Math.random() * chars.length)) + '_' + chars.charAt(Math.floor(Math.random() * chars.length));
+            document.getElementById('target-user').innerText = res;
+            document.getElementById('final-user').innerText = res;
         }
+
+        // 2. معالجة الطلب مع تأثير الدخان
+        function processOrder() {
+            // إخفاء النموذج وإظهار شاشة الدخان
+            document.getElementById('checkout-form').style.display = 'none';
+            document.getElementById('smoke-screen').style.display = 'flex';
+
+            // انتظر 3 ثواني ثم أظهر النجاح
+            setTimeout(() => {
+                document.getElementById('smoke-screen').style.display = 'none';
+                document.getElementById('success-screen').style.display = 'block';
+            }, 3000);
+        }
+
+        window.onload = setupPage;
     </script>
 </body>
 </html>
