@@ -3,246 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دورة المدرب سعود | الاختراق الأخلاقي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>متجر سعود | الواجهة الرسمية</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Cairo', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #020617;
-            color: white;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
         }
 
-        #bg-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            opacity: 0.25;
+        /* تنسيق الهيدر العلوي */
+        .header-main {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(2,6,23,0.8) 0%, rgba(2,6,23,0.95) 100%);
-            z-index: -1;
-        }
-
-        .saud-avatar-pulse {
-            position: relative;
-            border-radius: 50%;
-        }
-        .saud-avatar-pulse::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: 50%;
-            background: rgba(59, 130, 246, 0.4);
-            animation: pulse-ring 2s infinite;
-            z-index: -1;
-        }
-
-        @keyframes pulse-ring {
-            0% { transform: scale(0.8); opacity: 0.5; }
-            100% { transform: scale(1.3); opacity: 0; }
-        }
-
-        .ticker-container {
-            width: 100%;
-            overflow: hidden;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
-            padding: 14px 0;
+        /* قائمة التصنيفات مثل MSH */
+        .category-pill {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            transition: all 0.3s;
             white-space: nowrap;
-            z-index: 10;
         }
-        .ticker-wrapper {
-            display: inline-block;
-            animation: ticker-scroll 120s linear infinite;
-        }
-        .comment-item {
-            display: inline-block;
-            margin-left: 50px;
-            color: #e2e8f0;
-            font-size: 0.9rem;
-            background: rgba(255,255,255,0.05);
-            padding: 5px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-        .comment-item span { color: #60a5fa; font-weight: 700; margin-left: 8px; }
-
-        @keyframes ticker-scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .category-pill:hover, .category-pill.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s ease;
+        /* بطاقة المنتج الاحترافية */
+        .product-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
-        .btn-primary:hover {
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-            transform: translateY(-2px);
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        .product-img {
+            width: 100%;
+            height: 180px;
+            background: #fdfdfd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            border-bottom: 1px solid #f9f9f9;
         }
 
-        /* تنسيق الضمان الذهبي */
-        .golden-guarantee {
-            background: linear-gradient(145deg, rgba(251, 191, 36, 0.1), rgba(217, 119, 6, 0.05));
-            border: 1px dashed #fbbf24;
-            animation: border-pulse 3s infinite ease-in-out;
+        .btn-add-cart {
+            background: #2563eb;
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+            transition: 0.3s;
         }
-        @keyframes border-pulse {
-            0%, 100% { border-color: rgba(251, 191, 36, 0.5); }
-            50% { border-color: rgba(251, 191, 36, 1); }
-        }
+        .btn-add-cart:hover { background: #1d4ed8; }
 
+        .price-tag {
+            color: #2563eb;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
-    <canvas id="bg-canvas"></canvas>
-    <div class="overlay"></div>
 
-    <div class="ticker-container">
-        <div class="ticker-wrapper">
-            <div class="comment-item"><span>أبو فهد:</span>افضضل دوره بلا منازع</div>
-            <div class="comment-item"><span>صالح:</span>اخيرا حصلت احد يشرح عملي</div>
-            <div class="comment-item"><span>خالد الروقي:</span> الله يوفقك الشرح بطل تفهم غصب</div>
-            <div class="comment-item"><span>عبدالله:</span> الشرح واضح وجدا متعاون سعود</div>
-            <div class="comment-item"><span> الشمري:</span> من جربت الدورة ارتحت شغل مرتب</div>
-            <div class="comment-item"><span>فيصل:</span> كنت خايف بس طلع الرجال ثقة وثقة جداً</div>
-            <div class="comment-item"><span>ماجد العتيبي:</span> بيض الله وجهك على هالمحتوى</div>
-            <div class="comment-item"><span>تركي:</span> بديت من الصفر والحين فاهم كل شي</div>
-            <div class="comment-item"><span>سعد الروقي:</span> أطلق دورة وربي، </div>
-            <div class="comment-item"><span>خالد:</span> ختامها مسك افضل دورة مع أطلق مدرب</div>
-        </div>
-    </div>
-
-    <div class="max-w-5xl mx-auto px-6 mt-16 flex justify-between items-center bg-slate-900/40 backdrop-blur-xl p-6 rounded-3xl border border-slate-800/50 shadow-2xl relative z-10">
-        <div class="flex items-center gap-4">
-            <div class="flex text-yellow-400 text-2xl font-serif">★★★★★</div>
-            <div class="text-right">
-                <p class="text-white font-black leading-none text-2xl">4.9/5</p>
-                <p class="text-sm text-slate-400 mt-1">تقييم الطلاب</p>
+    <header class="header-main">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div class="text-2xl font-black text-blue-600">سعود<span class="text-gray-800">.STORE</span></div>
+            <div class="flex gap-4">
+                <button class="p-2 bg-gray-100 rounded-full">🔍</button>
+                <button class="p-2 bg-gray-100 rounded-full">🛒</button>
             </div>
-        </div>
-
-        <div class="flex items-center gap-4 text-left">
-            <div class="text-left">
-                <p class="text-blue-400 font-black text-4xl" id="subscriber-count">0</p>
-                <p class="text-sm text-slate-400 mt-1">طالب مشترك حالياً</p>
-            </div>
-            <div class="bg-blue-600/10 p-4 rounded-2xl border border-blue-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-            </div>
-        </div>
-    </div>
-
-    <header class="pt-20 pb-28 px-4 text-center relative z-10">
-        <div class="mb-10 flex justify-center">
-            <div class="w-36 h-36 saud-avatar-pulse border-4 border-slate-900 shadow-2xl overflow-hidden bg-slate-800">
-                <img src="https://api.dicebear.com/8.x/notionists-neutral/svg?seed=Saud&backgroundColor=3b82f6" alt="المدرب سعود" class="w-full h-full object-cover"/>
-            </div>
-        </div>
-
-        <h1 class="text-6xl md:text-7xl font-900 mb-8 tracking-tighter leading-tight">
-            دورة <span class="text-blue-500 relative">سعود | هكر أخلاقي</span>
-        </h1>
-        
-        <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-14 leading-relaxed font-normal">
-            تعلم أسرار الأمن السيبراني مع المدرب سعود بأسلوب تطبيقي مباشر.
-        </p>
-
-        <div class="flex flex-col items-center gap-6">
-            <a href="register.html?item=دورة الاختراق الأخلاقي&price=800" 
-               class="px-16 py-6 btn-primary text-white font-900 rounded-2xl text-2xl shadow-2xl hover:scale-105 transition-all duration-300">
-                اشترك الآن (800 ريال)
-            </a>
-
-            <div class="golden-guarantee max-w-md p-5 rounded-2xl flex items-center gap-4 text-right">
-                <div class="bg-yellow-500/20 p-3 rounded-full shadow-inner">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="text-yellow-500 font-bold text-lg">الضمان الذهبي</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        خلال شهر واحد، إذا لم تناسبك الدورة أو لم تحقق الاستفادة المرجوة، **نضمن لك استرجاع كامل المبلغ** فوراً دون أي تعقيدات.
-                    </p>
-                </div>
-            </div>
-            
-            <span class="text-xs text-slate-500 italic mt-4">
-                * يتم التواصل معك عبر الواتساب فور إتمام السداد لتفعيل الحساب.
-            </span>
         </div>
     </header>
 
-    <footer class="py-12 text-center border-t border-slate-800/50 bg-slate-950/50 relative z-10">
-        <p class="text-sm text-slate-500">© 2026 جميع الحقوق محفوظة لمتجر سعود</p>
+    <div class="max-w-7xl mx-auto px-4 py-6 overflow-x-auto flex gap-3 no-scrollbar">
+        <button class="category-pill active">الكل</button>
+        <button class="category-pill">خدمات السناب</button>
+        <button class="category-pill">يوزرات تيك توك</button>
+        <button class="category-pill">دورات تقنية</button>
+        <button class="category-pill">خدمات الانستقرام</button>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 pb-20">
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            
+            <div class="product-card">
+                <div class="product-img">👻</div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="font-bold text-gray-800 text-sm md:text-base mb-2">خدمة فك حظر السناب (دائم/جهاز)</h3>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">فك حظر كود SS06 وحظر الحسابات بشكل رسمي ومضمون.</p>
+                    <div class="mt-auto">
+                        <div class="price-tag mb-3">150 ر.س</div>
+                        <a href="register.html?item=فك حظر سناب&price=150" class="btn-add-cart block">إضافة للسلة</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">🎵</div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="font-bold text-gray-800 text-sm md:text-base mb-2">يوزر تيك توك ثلاثي مميز</h3>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">يوزرات ثلاثية فخمة مع الإيميل الأساسي وتوصيل فوري.</p>
+                    <div class="mt-auto">
+                        <div class="price-tag mb-3">280 ر.س</div>
+                        <a href="register.html?item=يوزر تيك توك ثلاثي&price=280" class="btn-add-cart block">إضافة للسلة</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card border-blue-200">
+                <div class="product-img">💎</div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="font-bold text-gray-800 text-sm md:text-base mb-2">يوزر تيك توك ثنائي (VIP)</h3>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">يوزرات نادرة جداً مخصصة للمشاهير وكبار الحسابات.</p>
+                    <div class="mt-auto">
+                        <div class="price-tag mb-3">350 ر.س</div>
+                        <a href="register.html?item=يوزر تيك توك ثنائي&price=350" class="btn-add-cart block">إضافة للسلة</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card border-purple-200">
+                <div class="product-img">💻</div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="font-bold text-gray-800 text-sm md:text-base mb-2">دورة احتراف الأمن السيبراني</h3>
+                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">تعلم الحماية والاختراق الأخلاقي من الصفر حتى التوظيف.</p>
+                    <div class="mt-auto">
+                        <div class="price-tag mb-3">800 ر.س</div>
+                        <a href="register.html?item=دورة الأمن السيبراني&price=800" class="btn-add-cart block bg-purple-600 hover:bg-purple-700">إضافة للسلة</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 py-10 mt-10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="text-blue-600 font-bold mb-4">متجر سعود المعتمد</div>
+            <div class="flex justify-center gap-6 text-gray-400 text-sm">
+                <a href="#">الرئيسية</a>
+                <a href="#">من نحن</a>
+                <a href="#">سياسة الاسترجاع</a>
+            </div>
+            <p class="text-gray-300 text-xs mt-8">© 2026 جميع الحقوق محفوظة لمتجر سعود</p>
+        </div>
     </footer>
 
-    <script>
-        // عداد المشتركين المحدث لـ 142
-        function animateValue(obj, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const current = Math.floor(progress * (end - start) + start);
-                obj.innerHTML = current; 
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        // كود الخلفية البرمجية
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.height = window.innerHeight;
-        canvas.width = window.innerWidth;
-        const characters = '010101ABCDEF';
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-        for (let x = 0; x < columns; x++) drops[x] = 1;
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(2, 6, 23, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#1e4ed8';
-            ctx.font = fontSize + 'px monospace';
-            for (let i = 0; i < drops.length; i++) {
-                const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-
-        window.onload = () => {
-            const obj = document.getElementById("subscriber-count");
-            animateValue(obj, 0, 142, 2500); // التحرك من 0 إلى 142
-            setInterval(drawMatrix, 50);
-        };
-    </script>
 </body>
 </html>
