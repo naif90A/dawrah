@@ -3,172 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر سعود | الواجهة الرسمية</title>
+    <title>OXR STORE | المتجر الأقوى</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #050505;
+            color: white;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
-        /* تنسيق الهيدر العلوي */
-        .header-main {
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* الخلفية المتحركة */
+        .bg-animate {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #0a0a2e 0%, #050505 100%);
+            z-index: -1;
+        }
+        .glow-overlay {
+            position: absolute;
+            width: 200%; height: 200%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.1;
+            animation: move-bg 20s linear infinite;
+        }
+        @keyframes move-bg { 
+            0% { transform: translate(0,0); } 
+            100% { transform: translate(-20%, -20%); } 
         }
 
-        /* قائمة التصنيفات مثل MSH */
-        .category-pill {
-            background: #fff;
-            border: 1px solid #eee;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-        .category-pill:hover, .category-pill.active {
-            background: #2563eb;
-            color: #fff;
-            border-color: #2563eb;
-        }
-
-        /* بطاقة المنتج الاحترافية */
-        .product-card {
-            background: #fff;
-            border-radius: 12px;
+        /* شريط الأخبار الأصفر السريع */
+        .urgent-bar {
+            background: #ffea00;
+            color: #000;
+            padding: 12px 0;
+            font-weight: 900;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #f0f0f0;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+            white-space: nowrap;
+            border-bottom: 2px solid #000;
+            position: relative;
+            z-index: 50;
         }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        .urgent-wrapper {
+            display: inline-block;
+            animation: fast-scroll 25s linear infinite;
         }
-        .product-img {
-            width: 100%;
-            height: 180px;
-            background: #fdfdfd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            border-bottom: 1px solid #f9f9f9;
+        .urgent-item { display: inline-block; margin-left: 100px; font-size: 15px; }
+        @keyframes fast-scroll { 
+            0% { transform: translateX(100%); } 
+            100% { transform: translateX(-100%); } 
         }
 
-        .btn-add-cart {
-            background: #2563eb;
+        /* نبض اسم المتجر OXR */
+        .oxr-logo {
+            font-size: 5rem;
+            font-weight: 900;
             color: #fff;
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 700;
-            text-align: center;
-            transition: 0.3s;
+            text-shadow: 0 0 15px #2563eb;
+            animation: neonPulse 1.2s infinite alternate;
         }
-        .btn-add-cart:hover { background: #1d4ed8; }
+        @keyframes neonPulse {
+            from { opacity: 0.7; transform: scale(1); }
+            to { opacity: 1; transform: scale(1.08); text-shadow: 0 0 30px #3b82f6, 0 0 60px #3b82f6; }
+        }
 
-        .price-tag {
-            color: #2563eb;
+        /* البطاقات الزجاجية */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-10px);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .btn-buy {
+            background: linear-gradient(90deg, #2563eb, #1d4ed8);
+            color: white;
             font-weight: 800;
-            font-size: 1.2rem;
+            padding: 12px;
+            border-radius: 15px;
+            display: block;
+            text-align: center;
+        }
+
+        .badge-sales {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
 
-    <header class="header-main">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <div class="text-2xl font-black text-blue-600">سعود<span class="text-gray-800">.STORE</span></div>
-            <div class="flex gap-4">
-                <button class="p-2 bg-gray-100 rounded-full">🔍</button>
-                <button class="p-2 bg-gray-100 rounded-full">🛒</button>
-            </div>
-        </div>
-    </header>
+    <div class="bg-animate"><div class="glow-overlay"></div></div>
 
-    <div class="max-w-7xl mx-auto px-4 py-6 overflow-x-auto flex gap-3 no-scrollbar">
-        <button class="category-pill active">الكل</button>
-        <button class="category-pill">خدمات السناب</button>
-        <button class="category-pill">يوزرات تيك توك</button>
-        <button class="category-pill">دورات تقنية</button>
-        <button class="category-pill">خدمات الانستقرام</button>
+    <div class="urgent-bar">
+        <div class="urgent-wrapper">
+            <span class="urgent-item">🔥 تحديث جديد: حضوري بلس يعمل الآن بكفاءة 100% لتخطي البصمة!</span>
+            <span class="urgent-item">⚠️ تنبيه: متوفر فك حظر "سناب شات" كود SS06 للأجهزة فورياً.</span>
+            <span class="urgent-item">✅ حصرياً: نسخة سناب "دنكاك" الذهبية متاحة الآن للتحميل.</span>
+            <span class="urgent-item">🚀 مبيعات حضوري بلس تجاوزت 4,647 مشتركاً.. انضم الآن!</span>
+        </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 pb-20">
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+    <header class="py-16 text-center">
+        <div class="oxr-logo">OXR</div>
+        <p class="text-blue-400 font-bold tracking-widest mt-4 uppercase">Elite Tech Store</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 pb-20">
+
+        <h2 class="text-3xl font-black mb-10 text-center text-transparent bg-clip-text bg-gradient-to-l from-blue-400 to-white">تطبيقات البلس والاشتراكات</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <div class="product-card">
-                <div class="product-img">👻</div>
-                <div class="p-4 flex flex-col flex-grow">
-                    <h3 class="font-bold text-gray-800 text-sm md:text-base mb-2">خدمة فك حظر السناب (دائم/جهاز)</h3>
-                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">فك حظر كود SS06 وحظر الحسابات بشكل رسمي ومضمون.</p>
-                    <div class="mt-auto">
-                        <div class="price-tag mb-3">150 ر.س</div>
-                        <a href="register.html?item=فك حظر سناب&price=150" class="btn-add-cart block">إضافة للسلة</a>
-                    </div>
+            <div class="glass-card p-8">
+                <div class="badge-sales">عدد المشتريات: 4,647 ✅</div>
+                <div class="text-6xl mb-4">📍</div>
+                <h3 class="text-2xl font-bold mb-2">حضوري بلس</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">تغيير الموقع الجغرافي وتخطي أنظمة الحماية الوظيفية بكل سهولة وأمان.</p>
+                <div class="flex justify-between items-center border-t border-white/5 pt-6">
+                    <span class="text-2xl font-black">99 ر.س</span>
+                    <a href="register.html?item=حضوري بلس&price=99" class="btn-buy px-8">شراء</a>
                 </div>
             </div>
 
-            <div class="product-card">
-                <div class="product-img">🎵</div>
-                <div class="p-4 flex flex-col flex-grow">
-                    <h3 class="font-bold text-gray-800 text-sm md:text-base mb-2">يوزر تيك توك ثلاثي مميز</h3>
-                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">يوزرات ثلاثية فخمة مع الإيميل الأساسي وتوصيل فوري.</p>
-                    <div class="mt-auto">
-                        <div class="price-tag mb-3">280 ر.س</div>
-                        <a href="register.html?item=يوزر تيك توك ثلاثي&price=280" class="btn-add-cart block">إضافة للسلة</a>
-                    </div>
+            <div class="glass-card p-8 border-yellow-500/20">
+                <div class="badge-sales text-yellow-400">الأكثر طلباً 🔥</div>
+                <div class="text-6xl mb-4">👻</div>
+                <h3 class="text-2xl font-bold mb-2 text-yellow-400">سناب شات دنكاك</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">حفظ السنابات، رفع من الاستديو، تخطي حظر الجهاز، والعديد من المميزات السرية.</p>
+                <div class="flex justify-between items-center border-t border-white/5 pt-6">
+                    <span class="text-2xl font-black text-yellow-400">149 ر.س</span>
+                    <a href="register.html?item=سناب دنكاك&price=149" class="btn-buy bg-yellow-500 !text-black px-8">شراء</a>
                 </div>
             </div>
 
-            <div class="product-card border-blue-200">
-                <div class="product-img">💎</div>
-                <div class="p-4 flex flex-col flex-grow">
-                    <h3 class="font-bold text-gray-800 text-sm md:text-base mb-2">يوزر تيك توك ثنائي (VIP)</h3>
-                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">يوزرات نادرة جداً مخصصة للمشاهير وكبار الحسابات.</p>
-                    <div class="mt-auto">
-                        <div class="price-tag mb-3">350 ر.س</div>
-                        <a href="register.html?item=يوزر تيك توك ثنائي&price=350" class="btn-add-cart block">إضافة للسلة</a>
-                    </div>
+            <div class="glass-card p-8 border-orange-500/20">
+                <div class="badge-sales text-orange-400">لعشاق الألعاب 🎮</div>
+                <div class="text-6xl mb-4">🔫</div>
+                <h3 class="text-2xl font-bold mb-2 text-orange-500">ببجي بلس (OXR)</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">ثبات سلاح، كاشف أماكن، حماية فائقة ضد الباند لتجربة لعب أسطورية.</p>
+                <div class="flex justify-between items-center border-t border-white/5 pt-6">
+                    <span class="text-2xl font-black">150 ر.س</span>
+                    <a href="register.html?item=ببجي بلس&price=150" class="btn-buy px-8">شراء</a>
                 </div>
             </div>
-
-            <div class="product-card border-purple-200">
-                <div class="product-img">💻</div>
-                <div class="p-4 flex flex-col flex-grow">
-                    <h3 class="font-bold text-gray-800 text-sm md:text-base mb-2">دورة احتراف الأمن السيبراني</h3>
-                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">تعلم الحماية والاختراق الأخلاقي من الصفر حتى التوظيف.</p>
-                    <div class="mt-auto">
-                        <div class="price-tag mb-3">800 ر.س</div>
-                        <a href="register.html?item=دورة الأمن السيبراني&price=800" class="btn-add-cart block bg-purple-600 hover:bg-purple-700">إضافة للسلة</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+        <h2 class="text-3xl font-black mt-20 mb-10 text-center text-transparent bg-clip-text bg-gradient-to-l from-blue-400 to-white">خدمات فك الحظر الفورية</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="glass-card p-6 text-center">
+                <div class="text-3xl mb-2">🔓</div>
+                <div class="text-sm font-bold">فك حظر سناب SS06</div>
+                <div class="text-blue-400 text-[10px] mt-2">10,400+ عملية ناجحة</div>
+            </div>
+            <div class="glass-card p-6 text-center">
+                <div class="text-3xl mb-2">🚫</div>
+                <div class="text-sm font-bold">فك حظر يودل A02</div>
+                <div class="text-blue-400 text-[10px] mt-2">3,500+ عملية ناجحة</div>
+            </div>
+            <div class="glass-card p-6 text-center">
+                <div class="text-3xl mb-2">🎵</div>
+                <div class="text-sm font-bold">فك حظر تيك توك</div>
+                <div class="text-blue-400 text-[10px] mt-2">6,100+ عملية ناجحة</div>
+            </div>
+            <div class="glass-card p-6 text-center">
+                <div class="text-3xl mb-2">📸</div>
+                <div class="text-sm font-bold">فك حظر انستقرام</div>
+                <div class="text-blue-400 text-[10px] mt-2">2,800+ عملية ناجحة</div>
+            </div>
+        </div>
+
     </main>
 
-    <footer class="bg-white border-t border-gray-100 py-10 mt-10">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="text-blue-600 font-bold mb-4">متجر سعود المعتمد</div>
-            <div class="flex justify-center gap-6 text-gray-400 text-sm">
-                <a href="#">الرئيسية</a>
-                <a href="#">من نحن</a>
-                <a href="#">سياسة الاسترجاع</a>
-            </div>
-            <p class="text-gray-300 text-xs mt-8">© 2026 جميع الحقوق محفوظة لمتجر سعود</p>
-        </div>
+    <footer class="py-12 text-center opacity-30 text-xs">
+        © 2026 OXR STORE | ALL RIGHTS RESERVED
     </footer>
 
 </body>
